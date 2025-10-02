@@ -1,6 +1,5 @@
 // src/app/api/employer-lead/route.ts (call email after building payload)
 import { NextResponse } from "next/server";
-import { sendLeadEmail } from "@/lib/email";
 
 export async function POST(req: Request) {
   const form = await req.formData();
