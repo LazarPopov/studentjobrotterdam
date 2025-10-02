@@ -190,7 +190,7 @@ const RAW_JOBS: RawJob[] = [
     perSaleAmountText: "150 еuros per shift",
     logoUrl: "/logos/pepperminds.jpeg",
     logoAlt: "Pepperminds logo",
-    externalUrl: "https://www.pepperminds.nl/makeithappen/?mkt=LZ",
+    externalUrl: "https://www.pepperminds.nl/makeithappen/?mkt=LZ&utm_source=viavia&utm_medium=crewapp&utm_campaign=makeithappen",
   },
 ];
 // Paste into src/data/jobs.ts (after RAW_JOBS is defined)
