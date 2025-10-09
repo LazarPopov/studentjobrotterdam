@@ -6,7 +6,7 @@ import Link from "next/link";
 
 import { listFeaturedJobs } from "@/data/jobs";
 import Image from "next/image";
-
+  
 function JobCardLink({
   job,
   className,

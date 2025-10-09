@@ -6,7 +6,7 @@ import { listJobs, listFeaturedJobs } from "@/data/jobs";
 export const metadata = {
   title: "Jobs in Rotterdam | Student Jobs Rotterdam",
   description: "All current student jobs in Rotterdam.",
-  alternates: { canonical: "https://studentjobsrotterdam.nl/jobs" },
+  alternates: { canonical: "https://studentjobsrotterdam.nl/jobs/${params.slug}" },
 };
 
 type Search = { q?: string | string[]; category?: string | string[]; english?: string | string[] };

@@ -10,7 +10,7 @@ import Link from "next/link";
 const PUBLISH_DATE = "2025-10-02";
 const MODIFIED_DATE = "2025-10-02";
 const CANONICAL =
-  "https://studentjobsrotterdam.nl/guides/best-paying-student-jobs-rotterdam";
+  "https://studentjobsrotterdam.nl/blog/best-paying-student-jobs-rotterdam-2025";
 const OG_IMAGE =   "https://studentjobsrotterdam.nl/blog/international-students-looking-for-English-speaking-jobs-near-Rotterdams-Erasmus-Bridge.jpg"; // place /public/guides/placeholder.jpg
 
 export const metadata: Metadata = {

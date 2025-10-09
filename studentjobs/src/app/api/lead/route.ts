@@ -1,11 +1,23 @@
-// src/app/api/lead/route.ts
+// src/app/api/lead/route.ts  (newsletter/signup endpoint to match your style)
+import { NextResponse } from "next/server";
+
 export async function POST(req: Request) {
-  const data = await req.formData();
-  // Honeypot (ignore bots)
-  if ((data.get("website") as string)?.length) {
-    return new Response("ok", { status: 200 });
+  const form = await req.formData();
+
+  // Honeypot
+  if (form.get("website")) {
+    return NextResponse.redirect(new URL("/thank-you?type=newsletter", req.url), { status: 303 });
   }
-  // TODO: send to your CRM/email/DB
-  console.log("NEWSLETTER_LEAD", Object.fromEntries(data.entries()));
-  return Response.redirect(new URL("/thank-you?type=newsletter", req.url), 303);
+
+  const payload = {
+    name: String(form.get("name") || ""),
+    email: String(form.get("email") || ""),
+    city: String(form.get("city") || "Rotterdam"),
+    submittedAt: new Date().toISOString(),
+  };
+
+  // TODO: send to CRM/email/DB
+  console.log("[NEWSLETTER_LEAD]", payload);
+
+  return NextResponse.redirect(new URL("/thank-you?type=newsletter", req.url), { status: 303 });
 }

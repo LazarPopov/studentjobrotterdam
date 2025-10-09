@@ -7,7 +7,7 @@ export const metadata: Metadata = {
   title: "Browse Job Categories in Rotterdam | Student Jobs Rotterdam",
   description:
     "Find student jobs in Rotterdam by category: hospitality, delivery, logistics, retail, tutoring, events, sales, and fieldwork. Mobile-friendly and SEO-optimized.",
-  alternates: { canonical: "https://studentjobsrotterdam.nl/categories" },
+  alternates: { canonical: "https://studentjobsrotterdam.nl/categories/${slug}" },
   openGraph: {
     title: "Browse Job Categories in Rotterdam",
     description:
