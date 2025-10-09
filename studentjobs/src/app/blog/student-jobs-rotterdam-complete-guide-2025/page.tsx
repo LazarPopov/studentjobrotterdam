@@ -50,14 +50,14 @@ export const metadata: Metadata = {
 export default function GuideComplete() {
   return (
     <section className="section">
-      <div className="mx-auto max-w-3xl">
-        <header>
-          <h1 className="text-3xl md:text-5xl font-semibold">
+      <div className="mx-auto max-w-6xl">
+        {/* HEADER */}
+        <header className="max-w-3xl">
+          <h1 className="text-3xl md:text-5xl font-semibold leading-tight">
             Student Jobs in Rotterdam — Complete Guide (2025)
           </h1>
-          <p className="mt-2 text-sm text-slate-600">
-            By <span className="font-medium">Student Jobs Rotterdam</span> •
-            Updated{" "}
+          <p className="mt-3 text-sm text-slate-600">
+            By <span className="font-medium">Student Jobs Rotterdam</span> • Updated{" "}
             {new Date(MODIFIED_DATE).toLocaleDateString("en-NL", {
               year: "numeric",
               month: "long",
@@ -65,7 +65,7 @@ export default function GuideComplete() {
             })}
           </p>
 
-          <div className="mt-5 rounded-2xl border overflow-hidden">
+          <div className="mt-5 overflow-hidden rounded-2xl border bg-white">
             <Image
               src="/blog/international-students-looking-for-English-speaking-jobs-near-Rotterdams-Erasmus-Bridge.png"
               alt="International students looking for English-speaking jobs near Rotterdam's Erasmus Bridge"
@@ -77,311 +77,157 @@ export default function GuideComplete() {
           </div>
         </header>
 
-        {/* Table of contents */}
-        <nav
-          aria-label="Table of contents"
-          className="mt-6 rounded-2xl border p-4 bg-slate-50"
-        >
-          <div className="font-semibold">On this page</div>
-          <ul className="mt-2 list-disc pl-5 text-sm text-slate-700 space-y-1">
-            <li>
-              <a href="#quickstart" className="underline">
-                Quick-start checklist
-              </a>
-            </li>
-            <li>
-              <a href="#permits" className="underline">
-                Work permits & hours
-              </a>
-            </li>
-            <li>
-              <a href="#contracts-pay" className="underline">
-                Contracts, pay & allowances
-              </a>
-            </li>
-            <li>
-              <a href="#neighborhoods" className="underline">
-                Neighborhoods & commute tips
-              </a>
-            </li>
-            <li>
-              <a href="#categories" className="underline">
-                Best categories for students
-              </a>
-            </li>
-            <li>
-              <a href="#where-to-look" className="underline">
-                Where to find jobs (fast)
-              </a>
-            </li>
-            <li>
-              <a href="#cv-templates" className="underline">
-                CV & message templates
-              </a>
-            </li>
-            <li>
-              <a href="#schedule" className="underline">
-                Weekly schedule that works with classes
-              </a>
-            </li>
-            <li>
-              <a href="#tax-bsn" className="underline">
-                BSN, bank, taxes & payslips
-              </a>
-            </li>
-            <li>
-              <a href="#faq" className="underline">
-                FAQ
-              </a>
-            </li>
-          </ul>
-        </nav>
+        {/* CONTENT + TOC */}
+        <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_320px]">
+          {/* TOC (mobile first) */}
+          <nav
+            aria-label="Table of contents"
+            className="
+              order-1 lg:order-2
+              lg:sticky lg:top-24 h-max
+              rounded-2xl border p-4 bg-slate-50
+              text-sm text-slate-700
+            "
+          >
+            <div className="font-semibold">On this page</div>
+            <ul className="mt-2 space-y-1">
+              <li><a href="#quickstart" className="underline">Quick-start checklist</a></li>
+              <li><a href="#permits" className="underline">Work permits & hours</a></li>
+              <li><a href="#contracts-pay" className="underline">Contracts, pay & allowances</a></li>
+              <li><a href="#neighborhoods" className="underline">Neighborhoods & commute tips</a></li>
+              <li><a href="#categories" className="underline">Best categories for students</a></li>
+              <li><a href="#where-to-look" className="underline">Where to find jobs (fast)</a></li>
+              <li><a href="#cv-templates" className="underline">CV & message templates</a></li>
+              <li><a href="#schedule" className="underline">Weekly schedule that works with classes</a></li>
+              <li><a href="#tax-bsn" className="underline">BSN, bank, taxes & payslips</a></li>
+              <li><a href="#faq" className="underline">FAQ</a></li>
+            </ul>
+          </nav>
 
-        <article className="prose prose-slate max-w-none mt-8">
-          <h2 id="quickstart">Quick-start checklist</h2>
-          <ul>
-            <li>
-              Create a <strong>1-page CV</strong> (English or Dutch) with
-              availability block and skills line.
-            </li>
-            <li>
-              Choose <strong>2–3 categories</strong> to focus on:{" "}
-              <Link href="/categories/hospitality" className="underline">
-                Hospitality
-              </Link>
-              ,{" "}
-              <Link href="/categories/delivery" className="underline">
-                Delivery
-              </Link>
-              ,{" "}
-              <Link href="/categories/fieldwork" className="underline">
-                Fieldwork
-              </Link>
-              ,{" "}
-              <Link href="/categories/tutoring" className="underline">
-                Tutoring
-              </Link>
-              ,{" "}
-              <Link href="/categories/sales" className="underline">
-                Sales
-              </Link>
-              .
-            </li>
-            <li>
-              Apply <strong>before 10:00</strong>, then{" "}
-              <strong>follow up the same day</strong>.
-            </li>
-            <li>
-              Bring <strong>ID, BSN/appointment, IBAN</strong> and (if needed)
-              residence/work permission.
-            </li>
-            <li>
-              Save time:{" "}
-              <Link href="/jobs" className="underline">
-                browse all jobs
-              </Link>{" "}
-              or{" "}
-              <Link href="/jobs?english=true" className="underline">
-                English-friendly only
-              </Link>
-              .
-            </li>
-          </ul>
+          {/* ARTICLE */}
+          <article
+            className="
+              order-2 lg:order-1
+              max-w-3xl
+              space-y-6
+              leading-relaxed text-slate-800
+              [&_h2]:mt-10 [&_h2]:text-2xl [&_h2]:font-semibold
+              [&_h3]:mt-6  [&_h3]:text-xl  [&_h3]:font-semibold
+              [&_p]:mt-3   [&_ul]:mt-3   [&_ol]:mt-3
+              [&_ul]:list-disc [&_ul]:pl-6
+              [&_ol]:list-decimal [&_ol]:pl-6
+              [&_a]:underline [&_a]:text-brand-700 hover:[&_a]:text-brand-600
+            "
+          >
+            <h2 id="quickstart">Quick-start checklist</h2>
+            <ul>
+              <li>Create a <strong>1-page CV</strong> (English or Dutch) with availability block and skills line.</li>
+              <li>
+                Choose <strong>2–3 categories</strong> to focus on:{" "}
+                <Link href="/categories/hospitality">Hospitality</Link>,{" "}
+                <Link href="/categories/delivery">Delivery</Link>,{" "}
+                <Link href="/categories/fieldwork">Fieldwork</Link>,{" "}
+                <Link href="/categories/tutoring">Tutoring</Link>,{" "}
+                <Link href="/categories/sales">Sales</Link>.
+              </li>
+              <li>Apply <strong>before 10:00</strong>, then <strong>follow up the same day</strong>.</li>
+              <li>Bring <strong>ID, BSN/appointment, IBAN</strong> and (if needed) residence/work permission.</li>
+              <li>
+                Save time: <Link href="/jobs">browse all jobs</Link> or{" "}
+                <Link href="/jobs?english=true">English-friendly only</Link>.
+              </li>
+            </ul>
 
-          <h2 id="permits">Work permits & hours</h2>
-          <p>
-            Rules differ by nationality and enrollment. As a general orientation
-            (confirm specifics with your employer):
-          </p>
-          <ul>
-            <li>
-              <strong>EU/EEA</strong>: usually free to work; standard Dutch
-              employment rules apply.
-            </li>
-            <li>
-              <strong>Non-EU</strong>: many students are limited to{" "}
-              <strong>~16 h/week during the academic year</strong> (and more in
-              summer) with the correct permission. Always verify your personal
-              situation before accepting hours.
-            </li>
-          </ul>
+            <h2 id="permits">Work permits & hours</h2>
+            <p>Rules differ by nationality and enrollment. As a general orientation (confirm specifics with your employer):</p>
+            <ul>
+              <li><strong>EU/EEA</strong>: usually free to work; standard Dutch employment rules apply.</li>
+              <li>
+                <strong>Non-EU</strong>: many students are limited to <strong>~16 h/week during the academic year</strong> (and more in
+                summer) with the correct permission. Always verify your personal situation before accepting hours.
+              </li>
+            </ul>
 
-          <h2 id="contracts-pay">Contracts, pay & allowances</h2>
-          <ul>
-            <li>
-              <strong>Types</strong>: part-time, on-call (0-uren), min-max, or
-              temp/agency. Ask about guaranteed hours.
-            </li>
-            <li>
-              <strong>Pay</strong>: many student roles pay{" "}
-              <strong>€13–€17/h</strong>. Tutoring can reach{" "}
-              <strong>€15–€18+/h</strong>.
-            </li>
-            <li>
-              <strong>Allowances</strong>: evening/night/weekend premiums,
-              travel reimbursements, and <strong>8% holiday pay</strong>.
-            </li>
-            <li>
-              <strong>Payslip</strong>: check gross vs net, hours, and
-              allowances each month.
-            </li>
-          </ul>
+            <h2 id="contracts-pay">Contracts, pay & allowances</h2>
+            <ul>
+              <li><strong>Types</strong>: part-time, on-call (0-uren), min-max, or temp/agency. Ask about guaranteed hours.</li>
+              <li><strong>Pay</strong>: many student roles pay <strong>€13–€17/h</strong>. Tutoring can reach <strong>€15–€18+/h</strong>.</li>
+              <li><strong>Allowances</strong>: evening/night/weekend premiums, travel reimbursements, and <strong>8% holiday pay</strong>.</li>
+              <li><strong>Payslip</strong>: check gross vs net, hours, and allowances each month.</li>
+            </ul>
 
-          <h2 id="neighborhoods">Neighborhoods & commute tips</h2>
-          <p>
-            Rotterdam is spread out; quick commutes help you keep grades and
-            income balanced:
-          </p>
-          <ul>
-            <li>
-              <strong>Centrum/Markthal</strong>: hospitality/retail density and
-              festivals.
-            </li>
-            <li>
-              <strong>Kralingen</strong>: near campus; café and tutoring gigs.
-            </li>
-            <li>
-              <strong>Waalhaven/Port</strong>: logistics & warehouse evening
-              shifts.
-            </li>
-            <li>
-              <strong>Zuid/Zuidplein</strong>: retail and events; good metro
-              links.
-            </li>
-          </ul>
+            <h2 id="neighborhoods">Neighborhoods & commute tips</h2>
+            <p>Rotterdam is spread out; quick commutes help you keep grades and income balanced:</p>
+            <ul>
+              <li><strong>Centrum/Markthal</strong>: hospitality/retail density and festivals.</li>
+              <li><strong>Kralingen</strong>: near campus; café and tutoring gigs.</li>
+              <li><strong>Waalhaven/Port</strong>: logistics & warehouse evening shifts.</li>
+              <li><strong>Zuid/Zuidplein</strong>: retail and events; good metro links.</li>
+            </ul>
 
-          <h2 id="categories">Best categories for students</h2>
-          <ul>
-            <li>
-              <strong>Hospitality & Events</strong>: fast onboarding and
-              flexible shifts.
-            </li>
-            <li>
-              <strong>Delivery & Logistics</strong>: reliable pay; evening
-              schedules fit studies.
-            </li>
-            <li>
-              <strong>Tutoring</strong>: high hourly pay; great for strong
-              English/specific subjects.
-            </li>
-            <li>
-              <strong>Sales / Support</strong>: international teams value
-              language skills.
-            </li>
-          </ul>
+            <h2 id="categories">Best categories for students</h2>
+            <ul>
+              <li><strong>Hospitality & Events</strong>: fast onboarding and flexible shifts.</li>
+              <li><strong>Delivery & Logistics</strong>: reliable pay; evening schedules fit studies.</li>
+              <li><strong>Tutoring</strong>: high hourly pay; great for strong English/specific subjects.</li>
+              <li><strong>Sales / Support</strong>: international teams value language skills.</li>
+            </ul>
 
-          <h2 id="where-to-look">Where to find jobs (fast)</h2>
-          <ul>
-            <li>
-              <Link href="/jobs" className="underline">
-                Student Jobs Rotterdam — all jobs
-              </Link>
-            </li>
-            <li>
-              <Link href="/categories" className="underline">
-                Browse by category
-              </Link>{" "}
-              or{" "}
-              <Link href="/jobs?english=true" className="underline">
-                English-friendly only
-              </Link>
-              .
-            </li>
-            <li>
-              <Link href="/employers" className="underline">
-                Are you a business? Feature your job
-              </Link>{" "}
-              (for partners).
-            </li>
-          </ul>
+            <h2 id="where-to-look">Where to find jobs (fast)</h2>
+            <ul>
+              <li><Link href="/jobs">Student Jobs Rotterdam — all jobs</Link></li>
+              <li>
+                <Link href="/categories">Browse by category</Link> or <Link href="/jobs?english=true">English-friendly only</Link>.
+              </li>
+              <li><Link href="/employers">Are you a business? Feature your job</Link> (for partners).</li>
+            </ul>
 
-          <h2 id="cv-templates">CV & message templates</h2>
-          <p>
-            Paste this into your notes/cover field for quick applications:
-          </p>
-          <blockquote>
-            Hi! I’m a student in Rotterdam with availability on weekdays after
-            16:00 and weekends. I have customer-facing experience and can start
-            immediately. CV attached. Thanks for your time!
-          </blockquote>
-          <p>
-            Add a one-line skills bar on your CV:{" "}
-            <em>English C1 • Dutch A2 • Barista • Excel • Driver’s license B</em>
-            . List neighborhoods you can reach (Kralingen, Centrum, Zuidplein).
-          </p>
-
-          <h2 id="schedule">Weekly schedule that works with classes</h2>
-          <ul>
-            <li>
-              <strong>Mon–Thu</strong>: 1–2 evening shifts (logistics, retail,
-              hospitality).
-            </li>
-            <li>
-              <strong>Fri–Sun</strong>: 1–2 day/evening shifts (events, café).
-            </li>
-            <li>
-              Keep a stable weekly pattern; managers love predictability.
-            </li>
-          </ul>
-
-          <h2 id="tax-bsn">BSN, bank, taxes & payslips</h2>
-          <ul>
-            <li>
-              <strong>BSN</strong>: required for payroll; keep the confirmation
-              from your appointment if still pending.
-            </li>
-            <li>
-              <strong>Bank/IBAN</strong>: Dutch account speeds up payment.
-            </li>
-            <li>
-              <strong>Taxes</strong>: students often get refunds; keep payslips
-              and annual statements.
-            </li>
-          </ul>
-
-          <div className="mt-8 rounded-2xl border p-5 bg-white">
-            <div className="font-semibold text-lg">Ready to apply?</div>
-            <p className="mt-1">
-              Start here:{" "}
-              <Link href="/jobs" className="underline">
-                see all jobs
-              </Link>
-              ,{" "}
-              <Link href="/jobs?english=true" className="underline">
-                English-friendly only
-              </Link>{" "}
-              or{" "}
-              <Link href="/categories" className="underline">
-                browse categories
-              </Link>
-              . Hiring?{" "}
-              <Link href="/employers" className="underline">
-                Feature your job
-              </Link>
-              .
+            <h2 id="cv-templates">CV & message templates</h2>
+            <p>Paste this into your notes/cover field for quick applications:</p>
+            <blockquote>
+              Hi! I’m a student in Rotterdam with availability on weekdays after 16:00 and weekends. I have
+              customer-facing experience and can start immediately. CV attached. Thanks for your time!
+            </blockquote>
+            <p>
+              Add a one-line skills bar on your CV: <em>English C1 • Dutch A2 • Barista • Excel • Driver’s license B</em>.
+              List neighborhoods you can reach (Kralingen, Centrum, Zuidplein).
             </p>
-          </div>
 
-          <h2 id="faq">FAQ</h2>
-          <h3>Is Dutch required?</h3>
-          <p>
-            Not always. Hospitality, logistics, delivery, events, and many
-            tutoring roles are English-friendly. Basic Dutch helps for retail.
-          </p>
+            <h2 id="schedule">Weekly schedule that works with classes</h2>
+            <ul>
+              <li><strong>Mon–Thu</strong>: 1–2 evening shifts (logistics, retail, hospitality).</li>
+              <li><strong>Fri–Sun</strong>: 1–2 day/evening shifts (events, café).</li>
+              <li>Keep a stable weekly pattern; managers love predictability.</li>
+            </ul>
 
-          <h3>How many hours should I target?</h3>
-          <p>
-            Many students do <strong>8–20 h/week</strong>. Confirm any
-            restrictions tied to your residence/permit.
-          </p>
+            <h2 id="tax-bsn">BSN, bank, taxes & payslips</h2>
+            <ul>
+              <li><strong>BSN</strong>: required for payroll; keep the confirmation from your appointment if still pending.</li>
+              <li><strong>Bank/IBAN</strong>: Dutch account speeds up payment.</li>
+              <li><strong>Taxes</strong>: students often get refunds; keep payslips and annual statements.</li>
+            </ul>
 
-          <h3>What’s a good starting wage?</h3>
-          <p>
-            Often <strong>€13–€17/h</strong> for hospitality/logistics and{" "}
-            <strong>€15–€18+/h</strong> for tutoring, plus allowances where
-            applicable.
-          </p>
-        </article>
+            <div className="rounded-2xl border p-5 bg-white">
+              <div className="font-semibold text-lg">Ready to apply?</div>
+              <p className="mt-1">
+                Start here: <Link href="/jobs">see all jobs</Link>,{" "}
+                <Link href="/jobs?english=true">English-friendly only</Link> or{" "}
+                <Link href="/categories">browse categories</Link>. Hiring?{" "}
+                <Link href="/employers">Feature your job</Link>.
+              </p>
+            </div>
+
+            <h2 id="faq">FAQ</h2>
+            <h3>Is Dutch required?</h3>
+            <p>Not always. Hospitality, logistics, delivery, events, and many tutoring roles are English-friendly. Basic Dutch helps for retail.</p>
+
+            <h3>How many hours should I target?</h3>
+            <p>Many students do <strong>8–20 h/week</strong>. Confirm any restrictions tied to your residence/permit.</p>
+
+            <h3>What’s a good starting wage?</h3>
+            <p>Often <strong>€13–€17/h</strong> for hospitality/logistics and <strong>€15–€18+/h</strong> for tutoring, plus allowances where applicable.</p>
+          </article>
+        </div>
 
         {/* JSON-LD: Article + Breadcrumb + FAQ + HowTo */}
         <script
@@ -402,10 +248,7 @@ export default function GuideComplete() {
                 name: "Student Jobs Rotterdam",
                 url: "https://studentjobsrotterdam.nl/",
               },
-              publisher: {
-                "@type": "Organization",
-                name: "Student Jobs Rotterdam",
-              },
+              publisher: { "@type": "Organization", name: "Student Jobs Rotterdam" },
               mainEntityOfPage: { "@type": "WebPage", "@id": CANONICAL },
             }),
           }}
@@ -417,18 +260,8 @@ export default function GuideComplete() {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               itemListElement: [
-                {
-                  "@type": "ListItem",
-                  position: 1,
-                  name: "Blog",
-                  item: "https://studentjobsrotterdam.nl/blog",
-                },
-                {
-                  "@type": "ListItem",
-                  position: 2,
-                  name: "Student Jobs in Rotterdam — Complete Guide (2025)",
-                  item: CANONICAL,
-                },
+                { "@type": "ListItem", position: 1, name: "Blog", item: "https://studentjobsrotterdam.nl/blog" },
+                { "@type": "ListItem", position: 2, name: "Student Jobs in Rotterdam — Complete Guide (2025)", item: CANONICAL },
               ],
             }),
           }}

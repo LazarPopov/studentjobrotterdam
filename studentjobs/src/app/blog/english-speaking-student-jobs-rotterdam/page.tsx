@@ -1,30 +1,32 @@
-// src/app/blog/english-speaking-student-jobs-rotterdam/page.tsx
+// src/app/blog/best-paying-student-jobs-rotterdam-2025/page.tsx
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 const PUBLISH_DATE = "2025-10-02";
 const MODIFIED_DATE = "2025-10-02";
-const CANONICAL = "https://studentjobsrotterdam.nl/blog/english-speaking-student-jobs-rotterdam";
-const OG_IMAGE =   "https://studentjobsrotterdam.nl/blog/international-students-looking-for-English-speaking-jobs-near-Rotterdams-Erasmus-Bridge.jpg"; // place /public/guides/placeholder.jpg
-
+const CANONICAL =
+  "https://studentjobsrotterdam.nl/blog/best-paying-student-jobs-rotterdam-2025";
+const OG_IMAGE =
+  "https://studentjobsrotterdam.nl/blog/international-students-looking-for-English-speaking-jobs-near-Rotterdams-Erasmus-Bridge.jpg";
 
 export const metadata: Metadata = {
-  title: "English-Speaking Student Jobs in Rotterdam (2025) — Where to Find Them & How to Stand Out",
+  title:
+    "Best-Paying Student Jobs in Rotterdam (2025) — Shift Types, Industries & Certifications",
   description:
-    "A practical guide to English-speaking student jobs in Rotterdam. Best categories, typical pay, quick-apply templates, and where to search — without Dutch.",
+    "Discover the best-paying student jobs in Rotterdam for 2025: evening/weekend shifts, logistics, tutoring, events team leads, and certifications like BHV, HACCP, VCA, forklift.",
   keywords: [
-    "English-speaking jobs Rotterdam",
-    "student jobs Rotterdam",
-    "international student jobs Netherlands",
-    "part-time jobs Rotterdam",
-    "no Dutch jobs Rotterdam",
+    "best paying student jobs Rotterdam",
+    "high paying student jobs Rotterdam",
+    "student wage Rotterdam",
+    "BHV HACCP VCA forklift certificate",
+    "evening night weekend allowance Netherlands",
   ],
   alternates: { canonical: CANONICAL },
   openGraph: {
-    title: "English-Speaking Student Jobs in Rotterdam (2025)",
+    title: "Best-Paying Student Jobs in Rotterdam (2025)",
     description:
-      "Find roles that don’t require Dutch: hospitality, events, delivery/logistics, tutoring, and more. Tips, pay ranges, and quick-apply templates.",
+      "Shift types, industries, and certifications that add €€ to your hourly rate — with quick wins for students.",
     url: CANONICAL,
     type: "article",
     locale: "en_NL",
@@ -35,29 +37,37 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "English-Speaking Student Jobs in Rotterdam (2025)",
+    title: "Best-Paying Student Jobs in Rotterdam (2025)",
     description:
-      "Best categories, pay ranges, and quick-apply tips for English-speaking student jobs in Rotterdam.",
+      "Which student jobs pay the most in Rotterdam? Get the tactics, categories, and certs to boost your rate fast.",
     images: [OG_IMAGE],
   },
   robots: { index: true, follow: true },
 };
 
-export default function GuideEnglish() {
+export default function BestPayingGuide() {
   return (
     <section className="section">
-      <div className="mx-auto max-w-3xl">
-        <header>
-          <h1 className="text-3xl md:text-5xl font-semibold">
-            English-Speaking Student Jobs in Rotterdam (2025)
+      <div className="mx-auto max-w-6xl">
+        {/* HEADER */}
+        <header className="max-w-3xl">
+          <h1 className="text-3xl md:text-5xl font-semibold leading-tight">
+            Best-Paying Student Jobs in Rotterdam (2025)
           </h1>
-          <p className="mt-2 text-sm text-slate-600">
-            By <span className="font-medium">Student Jobs Rotterdam</span> • Updated {new Date(MODIFIED_DATE).toLocaleDateString("en-NL", { year: "numeric", month: "long", day: "numeric" })}
+          <p className="mt-3 text-sm text-slate-600">
+            By <span className="font-medium">Student Jobs Rotterdam</span> •
+            Updated{" "}
+            {new Date(MODIFIED_DATE).toLocaleDateString("en-NL", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })}
           </p>
 
-          <div className="mt-5 rounded-2xl border overflow-hidden">
+          <div className="mt-5 overflow-hidden rounded-2xl border bg-white">
+            {/* Keep file extension in /public in sync; this expects a .jpg */}
             <Image
-              src="/blog/international-students-looking-for-English-speaking-jobs-near-Rotterdams-Erasmus-Bridge.png"
+              src="/blog/international-students-looking-for-English-speaking-jobs-near-Rotterdams-Erasmus-Bridge.jpg"
               alt="International students looking for English-speaking jobs near Rotterdam's Erasmus Bridge"
               width={1280}
               height={720}
@@ -67,110 +77,259 @@ export default function GuideEnglish() {
           </div>
         </header>
 
-        {/* Table of contents */}
-        <nav aria-label="Table of contents" className="mt-6 rounded-2xl border p-4 bg-slate-50">
-          <div className="font-semibold">On this page</div>
-          <ul className="mt-2 list-disc pl-5 text-sm text-slate-700 space-y-1">
-            <li><a href="#where-to-look" className="underline">Where to look (fast)</a></li>
-            <li><a href="#best-categories" className="underline">Best categories without Dutch</a></li>
-            <li><a href="#pay" className="underline">Typical pay & allowances</a></li>
-            <li><a href="#apply-fast" className="underline">Apply fast (copy-paste template)</a></li>
-            <li><a href="#documents" className="underline">Documents & basics</a></li>
-            <li><a href="#faq" className="underline">FAQ</a></li>
-          </ul>
-        </nav>
+        {/* CONTENT + TOC */}
+        <div className="mt-8 grid gap-8 lg:grid-cols-[1fr_320px]">
+          {/* TOC (mobile first) */}
+          <nav
+            aria-label="Table of contents"
+            className="
+              order-1 lg:order-2
+              lg:sticky lg:top-24 h-max
+              rounded-2xl border p-4 bg-slate-50
+              text-sm text-slate-700
+            "
+          >
+            <div className="font-semibold">On this page</div>
+            <ul className="mt-2 space-y-1">
+              <li>
+                <a href="#top-categories" className="underline">
+                  Top-paying categories for students
+                </a>
+              </li>
+              <li>
+                <a href="#shift-bonuses" className="underline">
+                  Shift bonuses that boost pay
+                </a>
+              </li>
+              <li>
+                <a href="#certifications" className="underline">
+                  Certifications that add €€
+                </a>
+              </li>
+              <li>
+                <a href="#quick-wins" className="underline">
+                  Quick wins to raise your rate
+                </a>
+              </li>
+              <li>
+                <a href="#example-paths" className="underline">
+                  Example upgrade paths
+                </a>
+              </li>
+              <li>
+                <a href="#apply-now" className="underline">
+                  Apply now (high-paying filters)
+                </a>
+              </li>
+              <li>
+                <a href="#faq" className="underline">
+                  FAQ
+                </a>
+              </li>
+            </ul>
+          </nav>
 
-        <div className="prose prose-slate max-w-none mt-8">
-          <h2 id="where-to-look">Where to look (fast)</h2>
-          <p>
-            Start with our live listings and category pages — most roles are English-friendly and actively hiring.
-          </p>
-          <ul>
-            <li>
-              <Link href="/jobs?english=true" className="underline">All English-friendly jobs in Rotterdam</Link>
-            </li>
-            <li>
-              Browse by category:{" "}
-              <Link href="/categories/hospitality" className="underline">Hospitality</Link>,{" "}
-              <Link href="/categories/events" className="underline">Events</Link>,{" "}
-              <Link href="/categories/delivery" className="underline">Delivery</Link>,{" "}
-              <Link href="/categories/fieldwork" className="underline">Fieldwork</Link>,{" "}
-              <Link href="/categories/tutoring" className="underline">Tutoring</Link>,{" "}
-              <Link href="/categories/sales" className="underline">Sales</Link>.
-            </li>
-          </ul>
-
-          <h2 id="best-categories">Best categories without Dutch</h2>
-          <p>These categories regularly hire international students and typically operate in English:</p>
-          <ul>
-            <li><strong>Hospitality & Events</strong>: cafés, bars, event crews, festival staff.</li>
-            <li><strong>Delivery & Logistics</strong>: riders, warehouse evening shifts, port-adjacent roles.</li>
-            <li><strong>Tutoring</strong>: English-medium courses and private tutoring pay well.</li>
-            <li><strong>Sales/Support (international)</strong>: customer success, call/chat teams for EU markets.</li>
-          </ul>
-
-          <h2 id="pay">Typical pay & allowances</h2>
-          <p>
-            Rates vary by age and experience. As a quick orientation, many students earn <strong>€13–€17 per hour</strong> in
-            hospitality/logistics and <strong>€15–€18+ per hour</strong> in tutoring. Check listings for evening/night/weekend
-            allowances and 8% holiday pay.
-          </p>
-
-          <h2 id="apply-fast">Apply fast (copy-paste template)</h2>
-          <p>Use this short message in your application notes or first email:</p>
-          <blockquote>
-            Hi! I’m a student in Rotterdam with availability on weekdays after 16:00 and weekends. I have customer-facing experience and can start immediately. CV attached. Thanks for your time!
-          </blockquote>
-          <p>
-            Tip: apply before 10:00 and follow up the same day. Managers prioritize candidates who respond quickly.
-          </p>
-
-          <h2 id="documents">Documents & basics</h2>
-          <ul>
-            <li><strong>Bring:</strong> ID, BSN (or appointment), IBAN, residence/work permission if applicable.</li>
-            <li><strong>Contracts:</strong> part-time, on-call (0-uren), or min-max schedules; confirm guaranteed hours.</li>
-            <li><strong>Reliability:</strong> consistent weekly availability will beat a longer CV.</li>
-          </ul>
-
-          <div className="mt-8 rounded-2xl border p-5 bg-white">
-            <div className="font-semibold text-lg">Ready to find work?</div>
-            <p className="mt-1">
-              Start here:{" "}
-              <Link href="/jobs?english=true" className="underline">Browse English-friendly roles</Link>{" "}
-              or{" "}
-              <Link href="/categories" className="underline">explore all categories</Link>. Are you hiring?{" "}
-              <Link href="/employers" className="underline">Feature your job</Link>.
+          {/* ARTICLE */}
+          <article
+            className="
+              order-2 lg:order-1
+              max-w-3xl
+              space-y-6
+              leading-relaxed text-slate-800
+              [&_h2]:mt-10 [&_h2]:text-2xl [&_h2]:font-semibold
+              [&_h3]:mt-6  [&_h3]:text-xl  [&_h3]:font-semibold
+              [&_p]:mt-3   [&_ul]:mt-3   [&_ol]:mt-3
+              [&_ul]:list-disc [&_ul]:pl-6
+              [&_ol]:list-decimal [&_ol]:pl-6
+              [&_a]:underline [&_a]:text-brand-700 hover:[&_a]:text-brand-600
+              "
+          >
+            <h2 id="top-categories">Top-paying categories for students</h2>
+            <p>
+              Actual wages vary by age and experience, but these categories
+              often pay at the higher end for students:
             </p>
-          </div>
+            <ul>
+              <li>
+                <strong>Tutoring / Teaching Assistants</strong> — subject
+                tutors and uni assistant roles can pay well thanks to
+                specialized skills. Start here:{" "}
+                <Link href="/categories/tutoring">Tutoring jobs</Link>.
+              </li>
+              <li>
+                <strong>Logistics & Port-Adjacent Roles</strong> — evening/late
+                shifts and physical roles can add allowances. See{" "}
+                <Link href="/categories/delivery">Delivery</Link> and{" "}
+                <Link href="/categories/fieldwork">Fieldwork</Link>.
+              </li>
+              <li>
+                <strong>Events (Lead / Team Lead)</strong> — staff with
+                responsibility earn more than entry-level crew. Browse{" "}
+                <Link href="/categories/events">Events</Link>.
+              </li>
+              <li>
+                <strong>Sales with Commission</strong> — base + bonuses
+                (door-to-door, call/chat, retail add-ons). Check{" "}
+                <Link href="/categories/sales">Sales</Link>.
+              </li>
+              <li>
+                <strong>Hospitality (Skilled)</strong> — barista or shift lead
+                roles usually pay more than runner/host. Explore{" "}
+                <Link href="/categories/hospitality">Hospitality</Link>.
+              </li>
+            </ul>
 
-          <h2 id="faq">FAQ</h2>
-          <h3>Do I need Dutch?</h3>
-          <p>No. Many roles are English-friendly (hospitality, events, logistics, tutoring). Basic Dutch helps for retail.</p>
+            <h2 id="shift-bonuses">Shift bonuses that boost pay</h2>
+            <p>You can increase your net hourly rate by picking the right schedule:</p>
+            <ul>
+              <li>
+                <strong>Evening / Night / Weekend allowances</strong> — common
+                in logistics, warehouses, events, hospitality. Check listings
+                for exact premiums.
+              </li>
+              <li>
+                <strong>Holiday pay (8%)</strong> — paid monthly or annually on
+                top of the hourly rate.
+              </li>
+              <li>
+                <strong>Travel reimbursements</strong> — useful for Waalhaven/
+                Port or event sites.
+              </li>
+            </ul>
 
-          <h3>How many hours can I work?</h3>
-          <p>
-            EU students have flexible limits; non-EU students typically have stricter caps during the academic year. Always confirm with your employer.
-          </p>
+            <h2 id="certifications">Certifications that add €€</h2>
+            <p>
+              Short, affordable certificates can move you from entry-level to
+              higher-paid shifts:
+            </p>
+            <ul>
+              <li>
+                <strong>BHV</strong> (bedrijfshulpverlening / first aid + emergency
+                response) — valuable in events/hospitality.
+              </li>
+              <li>
+                <strong>HACCP</strong> — food safety; increases trust for
+                café/restaurant/kitchen roles.
+              </li>
+              <li>
+                <strong>VCA</strong> — safety standard often requested for
+                fieldwork/logistics/event build-up.
+              </li>
+              <li>
+                <strong>Forklift (heftruck)</strong> — relevant for warehouses;
+                often unlocks higher-paying stations.
+              </li>
+              <li>
+                <strong>Barista training</strong> — quick path up the
+                hospitality ladder.
+              </li>
+            </ul>
+            <p className="text-sm text-slate-600">
+              Tip: ask employers if they’ll sponsor or reimburse certifications
+              after a probation period.
+            </p>
 
-          <h3>What’s a good hourly rate?</h3>
-          <p>Often €13–€17/h for hospitality/logistics, €15–€18+/h for tutoring — plus allowances where applicable.</p>
+            <h2 id="quick-wins">Quick wins to raise your rate</h2>
+            <ul>
+              <li>
+                <strong>Target evening/weekend shifts</strong> in logistics or
+                events for allowances.
+              </li>
+              <li>
+                <strong>Pitch availability upfront</strong> (reliability ⇒
+                better shifts). Use our template in applications.
+              </li>
+              <li>
+                <strong>List neighborhoods</strong> you can reach fast (Centrum,
+                Kralingen, Zuidplein, Waalhaven).
+              </li>
+              <li>
+                <strong>Upgrade one skill</strong> in 1–2 weeks (barista, BHV,
+                VCA) and ask for lead/premium shifts.
+              </li>
+              <li>
+                <strong>Add English + basic Dutch</strong> on your CV (A2) — it
+                unlocks more roles and duties.
+              </li>
+            </ul>
+
+            <h2 id="example-paths">Example upgrade paths</h2>
+            <ol>
+              <li>
+                <strong>Hospitality runner → Barista → Shift lead</strong>:
+                take a weekend barista course, then ask to be scheduled on
+                machine + close shifts (usually higher pay).
+              </li>
+              <li>
+                <strong>Warehouse picker → Forklift-certified</strong>: get a
+                short forklift course and move to higher-paying stations.
+              </li>
+              <li>
+                <strong>Event crew → Team lead</strong>: do BHV and volunteer to
+                brief teams; leads typically earn more.
+              </li>
+              <li>
+                <strong>Good grades → Tutor</strong>: start with general
+                tutoring, then specialize (math, programming, languages) for
+                higher rates.
+              </li>
+            </ol>
+
+            <h2 id="apply-now">Apply now (high-paying filters)</h2>
+            <div className="rounded-2xl border p-5 bg-white">
+              <div className="font-semibold text-lg">Ready to earn more?</div>
+              <p className="mt-1">
+                Start here: <Link href="/jobs">see all jobs</Link>,{" "}
+                <Link href="/jobs?english=true">English-friendly only</Link>,
+                and browse <Link href="/categories">categories</Link>. If you’re
+                an employer, <Link href="/employers">feature your job</Link>.
+              </p>
+            </div>
+
+            <h2 id="faq">FAQ</h2>
+            <h3>Which student jobs pay the most in Rotterdam?</h3>
+            <p>
+              Often tutoring, logistics evening/night shifts, event leads, and
+              sales with commission. Skilled hospitality (barista/lead) also
+              earns more than entry roles.
+            </p>
+            <h3>How can I quickly increase my hourly rate?</h3>
+            <p>
+              Target shifts with allowances, get a short certificate (BHV, VCA,
+              forklift, barista), and ask for duties with responsibility (team
+              lead, machine operator, keyholder).
+            </p>
+            <h3>Do certifications really matter?</h3>
+            <p>
+              Yes. They signal safety and responsibility, letting managers
+              schedule you on better-paid tasks/shifts.
+            </p>
+          </article>
         </div>
 
-        {/* JSON-LD: BlogPosting + BreadcrumbList + FAQPage */}
+        {/* JSON-LD: Article + Breadcrumb + FAQ + HowTo */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "BlogPosting",
-              headline: "English-Speaking Student Jobs in Rotterdam (2025)",
+              "@type": "Article",
+              headline:
+                "Best-Paying Student Jobs in Rotterdam (2025) — Shift Types, Industries & Certifications",
               description:
-                "Find English-speaking student jobs in Rotterdam: best categories, pay ranges, quick-apply templates, and where to search.",
+                "Shift types, industries, and certifications that add €€ to your hourly rate as a student in Rotterdam.",
               image: OG_IMAGE,
               datePublished: PUBLISH_DATE,
               dateModified: MODIFIED_DATE,
-              author: { "@type": "Organization", name: "Student Jobs Rotterdam", url: "https://studentjobsrotterdam.nl/" },
-              publisher: { "@type": "Organization", name: "Student Jobs Rotterdam" },
+              author: {
+                "@type": "Organization",
+                name: "Student Jobs Rotterdam",
+                url: "https://studentjobsrotterdam.nl/",
+              },
+              publisher: {
+                "@type": "Organization",
+                name: "Student Jobs Rotterdam",
+              },
               mainEntityOfPage: { "@type": "WebPage", "@id": CANONICAL },
             }),
           }}
@@ -182,8 +341,18 @@ export default function GuideEnglish() {
               "@context": "https://schema.org",
               "@type": "BreadcrumbList",
               itemListElement: [
-                { "@type": "ListItem", position: 1, name: "Blog", item: "https://studentjobsrotterdam.nl/blog" },
-                { "@type": "ListItem", position: 2, name: "English-Speaking Student Jobs in Rotterdam", item: CANONICAL },
+                {
+                  "@type": "ListItem",
+                  position: 1,
+                  name: "Blog",
+                  item: "https://studentjobsrotterdam.nl/blog",
+                },
+                {
+                  "@type": "ListItem",
+                  position: 2,
+                  name: "Best-Paying Student Jobs in Rotterdam (2025)",
+                  item: CANONICAL,
+                },
               ],
             }),
           }}
@@ -194,33 +363,74 @@ export default function GuideEnglish() {
             __html: JSON.stringify({
               "@context": "https://schema.org",
               "@type": "FAQPage",
+              "@id": `${CANONICAL}#faq`,
               mainEntity: [
                 {
                   "@type": "Question",
-                  name: "Do I need Dutch?",
+                  name: "Which student jobs pay the most in Rotterdam?",
                   acceptedAnswer: {
                     "@type": "Answer",
                     text:
-                      "No. Many roles are English-friendly in hospitality, events, logistics, and tutoring. Basic Dutch helps for retail.",
+                      "Tutoring, logistics evening/night shifts, event leads, and sales with commission. Skilled hospitality (barista/lead) also pays above entry level.",
                   },
                 },
                 {
                   "@type": "Question",
-                  name: "How many hours can I work?",
+                  name: "How can I quickly increase my hourly rate?",
                   acceptedAnswer: {
                     "@type": "Answer",
                     text:
-                      "EU students have flexible limits; non-EU students usually have stricter caps during the academic year. Confirm with your employer.",
+                      "Target shifts with allowances, obtain short certifications (BHV, VCA, forklift, barista), and ask for higher-responsibility duties like team lead.",
                   },
                 },
                 {
                   "@type": "Question",
-                  name: "What’s a good hourly rate?",
+                  name: "Do certifications really matter?",
                   acceptedAnswer: {
                     "@type": "Answer",
                     text:
-                      "Often €13–€17/h for hospitality/logistics and €15–€18+/h for tutoring, with allowances where applicable.",
+                      "Yes—certifications signal safety and responsibility, enabling managers to assign higher-paying tasks and shifts.",
                   },
+                },
+              ],
+            }),
+          }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "HowTo",
+              name: "How to boost your student wage in Rotterdam in 2 weeks",
+              image: OG_IMAGE,
+              totalTime: "P14D",
+              supply: [
+                { "@type": "HowToSupply", name: "1-page CV (PDF)" },
+                { "@type": "HowToSupply", name: "BHV or VCA short course" },
+                {
+                  "@type": "HowToSupply",
+                  name: "Availability plan (evenings/weekends)",
+                },
+              ],
+              step: [
+                {
+                  "@type": "HowToStep",
+                  name: "Pick a higher-paying category",
+                  text:
+                    "Choose logistics evening shifts, tutoring, events lead, or sales with commission based on your strengths.",
+                },
+                {
+                  "@type": "HowToStep",
+                  name: "Get a quick certification",
+                  text:
+                    "Complete BHV, VCA, forklift, or barista training to unlock premium shifts and responsibilities.",
+                },
+                {
+                  "@type": "HowToStep",
+                  name: "Apply with targeted availability",
+                  text:
+                    "Submit applications before 10:00, highlight evening/weekend availability, and follow up the same day.",
                 },
               ],
             }),
