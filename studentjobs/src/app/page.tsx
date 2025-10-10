@@ -74,25 +74,25 @@ export default function Page() {
   {
     slug: "studenten-bijbaan-rotterdam",
     title: "Studenten bijbaan Rotterdam (2025) – Goed betaald, Engelstalig & weekend",
-    description:
+    excerpt:
       "De ultieme gids voor een studenten bijbaan in Rotterdam: avond/weekend, Engelstalig, zonder ervaring. Uurloon-tabellen, contractvormen, wijken en snelle filters.",
   },
   {
     slug: "student-jobs-rotterdam-complete-guide-2025",
     title: "Student Jobs in Rotterdam — Complete Guide (2025)",
-    description:
+    excerpt:
       "Permits, contracts, pay, neighborhoods, and tactics to land a job fast.",
   },
   {
     slug: "english-speaking-student-jobs-rotterdam",
     title: "English-Speaking Student Jobs in Rotterdam (2025)",
-    description:
+    excerpt:
       "Where to find roles that don’t require Dutch, with quick-apply tips.",
   },
   {
     slug: "best-paying-student-jobs-rotterdam-2025",
     title: "Best-Paying Student Jobs in Rotterdam (2025)",
-    description:
+    excerpt:
       "Shift bonuses, industries, and certifications that increase pay.",
   },
 ];
