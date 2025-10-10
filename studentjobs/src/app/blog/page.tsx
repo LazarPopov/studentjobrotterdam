@@ -5,6 +5,12 @@ import Link from "next/link";
 
 const POSTS = [
   {
+    slug: "studenten-bijbaan-rotterdam",
+    title: "Studenten bijbaan Rotterdam (2025) – Goed betaald, Engelstalig & weekend",
+    description:
+      "De ultieme gids voor een studenten bijbaan in Rotterdam: avond/weekend, Engelstalig, zonder ervaring. Uurloon-tabellen, contractvormen, wijken en snelle filters.",
+  },
+  {
     slug: "student-jobs-rotterdam-complete-guide-2025",
     title: "Student Jobs in Rotterdam — Complete Guide (2025)",
     description:
@@ -23,6 +29,7 @@ const POSTS = [
       "Shift bonuses, industries, and certifications that increase pay.",
   },
 ];
+
 
 export const metadata: Metadata = {
   title: "Blog | Student Jobs Rotterdam",
