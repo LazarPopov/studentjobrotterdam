@@ -91,32 +91,57 @@ function makeShortDescription(job: Partial<JobRecord>): string {
 type RawJob = Omit<JobRecord, "shortDescrition">;
 
 const RAW_JOBS: RawJob[] = [
-  {
-    slug: "domakin-viewing-agent-rotterdam",
-    title: "Domakin Viewing Agent (Remote Viewings)",
-    orgName: "Domakin",
+    {
+    slug: "pepperminds-door-to-door-sales-rotterdam",
+    title: "Pepperminds Door-to-Door Sales (Student Friendly)",
+    orgName: "Pepperminds",
     descriptionHtml:
-      "<p>Visit properties on behalf of students, stream live video, and complete a short checklist (condition, noise, registration, landlord details). Flexible shifts; training provided.</p><ul><li>Equipment: smartphone with data</li><li>Each viewing ~30–45 minutes</li><li>Bonus for fast response times</li></ul>",
+      "<p>Join a dynamic field team to represent brands and charities across Rotterdam. Training, daily briefings, and performance-based bonuses.</p><ul><li>Travel between neighborhoods</li><li>Team-based shifts</li><li>Commission on results</li></ul>",
     employmentType: "PART_TIME",
-    baseSalaryMin: 15,
-    baseSalaryMax: 22,
+    baseSalaryMin: 12,
+    baseSalaryMax: 20,
     currency: "EUR",
     payUnit: "HOUR",
     addressLocality: "Rotterdam",
-    area: "Citywide",
+    area: "Various districts",
     englishFriendly: true,
-    workHours: "4–16 h/week, flexible",
+    workHours: "10–20 h/week",
     datePosted: new Date().toISOString().slice(0, 10),
     validThrough: "2025-12-31",
-    categories: ["fieldwork", "events"],
+    categories: ["sales", "fieldwork"],
     featured: true,
-    // amounts for short description
-    perGigAmount: 20,                              // €20 per gig
-    // logo
-    logoUrl: "/logos/domakin.png",
-    logoAlt: "Domakin logo",
-    externalUrl: "https://www.domakin.nl/contact"
+    // unknown numeric commission -> use text fallback
+    perSaleAmountText: "150 еuros per shift",
+    logoUrl: "/logos/pepperminds.jpeg",
+    logoAlt: "Pepperminds logo",
+    externalUrl: "https://www.pepperminds.nl/makeithappen/?mkt=LZ&utm_source=viavia&utm_medium=crewapp&utm_campaign=makeithappen",
   },
+  // {
+  //   slug: "domakin-viewing-agent-rotterdam",
+  //   title: "Domakin Viewing Agent (Remote Viewings)",
+  //   orgName: "Domakin",
+  //   descriptionHtml:
+  //     "<p>Visit properties on behalf of students, stream live video, and complete a short checklist (condition, noise, registration, landlord details). Flexible shifts; training provided.</p><ul><li>Equipment: smartphone with data</li><li>Each viewing ~30–45 minutes</li><li>Bonus for fast response times</li></ul>",
+  //   employmentType: "PART_TIME",
+  //   baseSalaryMin: 15,
+  //   baseSalaryMax: 22,
+  //   currency: "EUR",
+  //   payUnit: "HOUR",
+  //   addressLocality: "Rotterdam",
+  //   area: "Citywide",
+  //   englishFriendly: true,
+  //   workHours: "4–16 h/week, flexible",
+  //   datePosted: new Date().toISOString().slice(0, 10),
+  //   validThrough: "2025-12-31",
+  //   categories: ["fieldwork", "events"],
+  //   featured: false,
+  //   // amounts for short description
+  //   perGigAmount: 20,                              // €20 per gig
+  //   // logo
+  //   logoUrl: "/logos/domakin.png",
+  //   logoAlt: "Domakin logo",
+  //   externalUrl: "https://www.domakin.nl/contact"
+  // },
   {
     slug: "domakin-room-finder-rotterdam",
     title: "Domakin Room Finder (Student Housing Sourcing)",
@@ -166,31 +191,6 @@ const RAW_JOBS: RawJob[] = [
     logoUrl: "/logos/rentswap.png",
     logoAlt: "RentSwap logo",
     externalUrl:"https://www.rentswap.nl/",
-  },
-  {
-    slug: "pepperminds-door-to-door-sales-rotterdam",
-    title: "Pepperminds Door-to-Door Sales (Student Friendly)",
-    orgName: "Pepperminds",
-    descriptionHtml:
-      "<p>Join a dynamic field team to represent brands and charities across Rotterdam. Training, daily briefings, and performance-based bonuses.</p><ul><li>Travel between neighborhoods</li><li>Team-based shifts</li><li>Commission on results</li></ul>",
-    employmentType: "PART_TIME",
-    baseSalaryMin: 12,
-    baseSalaryMax: 20,
-    currency: "EUR",
-    payUnit: "HOUR",
-    addressLocality: "Rotterdam",
-    area: "Various districts",
-    englishFriendly: true,
-    workHours: "10–20 h/week",
-    datePosted: new Date().toISOString().slice(0, 10),
-    validThrough: "2025-12-31",
-    categories: ["sales", "fieldwork"],
-    featured: true,
-    // unknown numeric commission -> use text fallback
-    perSaleAmountText: "150 еuros per shift",
-    logoUrl: "/logos/pepperminds.jpeg",
-    logoAlt: "Pepperminds logo",
-    externalUrl: "https://www.pepperminds.nl/makeithappen/?mkt=LZ&utm_source=viavia&utm_medium=crewapp&utm_campaign=makeithappen",
   },
 ];
 // Paste into src/data/jobs.ts (after RAW_JOBS is defined)
