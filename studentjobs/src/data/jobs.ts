@@ -109,7 +109,7 @@ const RAW_JOBS: RawJob[] = [
   datePosted: new Date().toISOString().slice(0, 10),
   validThrough: "2025-12-31",
   categories: ["delivery", "fieldwork"],
-  featured: false,
+  featured: true,
   perGigAmount: 60, // average earning per delivery hour
   logoUrl: "/logos/thuisbezorgd.png",
   logoAlt: "Thuisbezorgd.nl logo",
@@ -140,32 +140,32 @@ const RAW_JOBS: RawJob[] = [
     logoAlt: "Pepperminds logo",
     externalUrl: "https://www.pepperminds.nl/makeithappen/?mkt=LZ&utm_source=viavia&utm_medium=crewapp&utm_campaign=makeithappen",
   },
-  // {
-  //   slug: "domakin-viewing-agent-rotterdam",
-  //   title: "Domakin Viewing Agent (Remote Viewings)",
-  //   orgName: "Domakin",
-  //   descriptionHtml:
-  //     "<p>Visit properties on behalf of students, stream live video, and complete a short checklist (condition, noise, registration, landlord details). Flexible shifts; training provided.</p><ul><li>Equipment: smartphone with data</li><li>Each viewing ~30–45 minutes</li><li>Bonus for fast response times</li></ul>",
-  //   employmentType: "PART_TIME",
-  //   baseSalaryMin: 15,
-  //   baseSalaryMax: 22,
-  //   currency: "EUR",
-  //   payUnit: "HOUR",
-  //   addressLocality: "Rotterdam",
-  //   area: "Citywide",
-  //   englishFriendly: true,
-  //   workHours: "4–16 h/week, flexible",
-  //   datePosted: new Date().toISOString().slice(0, 10),
-  //   validThrough: "2025-12-31",
-  //   categories: ["fieldwork", "events"],
-  //   featured: false,
-  //   // amounts for short description
-  //   perGigAmount: 20,                              // €20 per gig
-  //   // logo
-  //   logoUrl: "/logos/domakin.png",
-  //   logoAlt: "Domakin logo",
-  //   externalUrl: "https://www.domakin.nl/contact"
-  // },
+  {
+    slug: "domakin-viewing-agent-rotterdam",
+    title: "Domakin Viewing Agent (Remote Viewings)",
+    orgName: "Domakin",
+    descriptionHtml:
+      "<p>Visit properties on behalf of students, stream live video, and complete a short checklist (condition, noise, registration, landlord details). Flexible shifts; training provided.</p><ul><li>Equipment: smartphone with data</li><li>Each viewing ~30–45 minutes</li><li>Bonus for fast response times</li></ul>",
+    employmentType: "PART_TIME",
+    baseSalaryMin: 15,
+    baseSalaryMax: 22,
+    currency: "EUR",
+    payUnit: "HOUR",
+    addressLocality: "Rotterdam",
+    area: "Citywide",
+    englishFriendly: true,
+    workHours: "4–16 h/week, flexible",
+    datePosted: new Date().toISOString().slice(0, 10),
+    validThrough: "2025-12-31",
+    categories: ["fieldwork", "events"],
+    featured: false,
+    // amounts for short description
+    perGigAmount: 20,                              // €20 per gig
+    // logo
+    logoUrl: "/logos/domakin.png",
+    logoAlt: "Domakin logo",
+    externalUrl: "https://www.domakin.nl/contact"
+  },
   {
     slug: "domakin-room-finder-rotterdam",
     title: "Domakin Room Finder (Student Housing Sourcing)",
