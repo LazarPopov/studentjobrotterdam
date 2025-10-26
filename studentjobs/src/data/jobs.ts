@@ -91,6 +91,30 @@ function makeShortDescription(job: Partial<JobRecord>): string {
 type RawJob = Omit<JobRecord, "shortDescrition">;
 
 const RAW_JOBS: RawJob[] = [
+  {
+  slug: "thuisbezorgd-takeaway-courier-netherlands",
+  title: "Thuisbezorgd / Takeaway Courier (Food Delivery)",
+  orgName: "Thuisbezorgd.nl",
+  descriptionHtml:
+    "<p>Deliver meals from local restaurants to customers using your bike, scooter, or car. Choose your own schedule, earn hourly pay plus tips, and explore your city while working independently.</p><ul><li>Requirements: smartphone with data, vehicle (bike/scooter/car)</li><li>Hourly rate + tips + bonuses</li><li>Flexible working hours; choose your shifts</li></ul>",
+  employmentType: "PART_TIME",
+  baseSalaryMin: 12,
+  baseSalaryMax: 15,
+  currency: "EUR",
+  payUnit: "HOUR",
+  addressLocality: "Rotterdam",
+  area: "Citywide / Multiple cities",
+  englishFriendly: true,
+  workHours: "Flexible shifts, 6–30 h/week",
+  datePosted: new Date().toISOString().slice(0, 10),
+  validThrough: "2025-12-31",
+  categories: ["delivery", "fieldwork"],
+  featured: false,
+  perGigAmount: 60, // average earning per delivery hour
+  logoUrl: "/logos/thuisbezorgd.png",
+  logoAlt: "Thuisbezorgd.nl logo",
+  externalUrl: "https://www.thuisbezorgd.nl/en/courier?city=blank&raf_id=478ba2228ffa17c8e591f221e022ffa2"
+},
     {
     slug: "pepperminds-door-to-door-sales-rotterdam",
     title: "Pepperminds Door-to-Door Sales (Student Friendly)",
