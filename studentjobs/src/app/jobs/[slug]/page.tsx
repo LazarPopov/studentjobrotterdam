@@ -3,12 +3,41 @@ import Image from "next/image";
 import Link from "next/link";
 import { listJobs } from "@/data/jobs";
 
+// SEO for the index page (unchanged)
 export const metadata = {
   title: "Jobs in Rotterdam | Student Jobs Rotterdam",
   description: "All current student jobs in Rotterdam.",
   alternates: { canonical: "https://studentjobsrotterdam.nl/jobs" },
 };
 
+// --- NEW: minimal JSON-LD for the listing page to help Google understand it’s a jobs list ---
+function ItemListJsonLd({
+  items,
+  baseUrl,
+}: {
+  items: { slug: string; title: string; externalUrl?: string }[];
+  baseUrl: string;
+}) {
+  const elementList = items.map((j, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: j.title,
+    url: j.externalUrl ? j.externalUrl : `${baseUrl}/jobs/${j.slug}`,
+  }));
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: elementList,
+  };
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
+// Link wrapper: keeps your current behaviour but adds safe rel attrs for externals
 function RowLink({
   job,
   className,
@@ -19,7 +48,12 @@ function RowLink({
   children: React.ReactNode;
 }) {
   return job.externalUrl ? (
-    <a href={job.externalUrl} target="_blank" rel="noopener noreferrer" className={className}>
+    <a
+      href={job.externalUrl}
+      target="_blank"
+      rel="nofollow external noopener noreferrer"
+      className={className}
+    >
       {children}
     </a>
   ) : (
@@ -31,9 +65,16 @@ function RowLink({
 
 export default function JobsIndex() {
   const jobs = listJobs();
+  const baseUrl = "https://studentjobsrotterdam.nl";
 
   return (
     <section className="px-6 py-10">
+      {/* JSON-LD for the listing page (does not affect UI) */}
+      <ItemListJsonLd
+        items={jobs.map((j) => ({ slug: j.slug, title: j.title, externalUrl: j.externalUrl }))}
+        baseUrl={baseUrl}
+      />
+
       <div className="mx-auto max-w-5xl">
         <h1 className="text-3xl md:text-4xl font-semibold">All Jobs in Rotterdam</h1>
 
@@ -71,7 +112,9 @@ export default function JobsIndex() {
               {/* Meta row */}
               <div className="mt-3 text-sm text-slate-700">
                 {j.baseSalaryMin
-                  ? `€${j.baseSalaryMin}${j.baseSalaryMax ? `–€${j.baseSalaryMax}` : ""}/${j.payUnit?.toLowerCase()}`
+                  ? `€${j.baseSalaryMin}${
+                      j.baseSalaryMax ? `–€${j.baseSalaryMax}` : ""
+                    }/${j.payUnit?.toLowerCase()}`
                   : "Pay: N/A"}
                 {" • "}
                 {j.workHours ?? "Hours: N/A"}
