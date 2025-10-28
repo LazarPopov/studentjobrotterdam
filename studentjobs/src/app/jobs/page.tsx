@@ -114,6 +114,7 @@ export default function JobsIndex({ searchParams }: { searchParams: Search }) {
                       {j.area ? ` • ${j.area}` : ""}
                       {" • "}
                       {j.englishFriendly ? "English-friendly" : "Dutch required"}
+                      {j.DUO ? "DUO" : "No Duo"}
                     </div>
                   </div>
                 </div>

@@ -1,9 +1,13 @@
-// src/components/JobPostingJsonLd.tsx
+// UPDATE in: src/components/JobPostingJsonLd.tsx
 import React from "react";
 import type { JobRecord } from "@/data/jobs";
 
 function asText(html: string) {
-  return html.replace(/<[^>]*>/g, " ").replace(/\s+/g, " ").trim();
+  return html.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, " ")
+             .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, " ")
+             .replace(/<[^>]*>/g, " ")
+             .replace(/\s+/g, " ")
+             .trim();
 }
 
 function salaryBlock(job: JobRecord) {
@@ -22,19 +26,22 @@ export default function JobPostingJsonLd({
   job: JobRecord;
   canonicalUrl: string;
 }) {
+  const siteOrigin = new URL(canonicalUrl).origin;
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "JobPosting",
     title: job.title,
-    description: asText(job.descriptionHtml || ""),
+    description: asText(job.descriptionHtml || job.shortDescrition || ""),
     datePosted: job.datePosted,
     ...(job.validThrough ? { validThrough: job.validThrough } : {}),
-    employmentType: job.employmentType,
+    ...(job.employmentType ? { employmentType: job.employmentType } : {}),
     hiringOrganization: {
       "@type": "Organization",
       name: job.orgName,
-      ...(job.logoUrl ? { logo: new URL(job.logoUrl, canonicalUrl).toString() } : {}),
-      sameAs: canonicalUrl.replace(/\/jobs\/.*$/, ""),
+      url: siteOrigin, // ✅ valid property; points to your site
+      ...(job.logoUrl ? { logo: new URL(job.logoUrl, siteOrigin).toString() } : {}),
+      sameAs: siteOrigin, // keep your brand URL
     },
     identifier: {
       "@type": "PropertyValue",
@@ -54,14 +61,13 @@ export default function JobPostingJsonLd({
     },
     ...(salaryBlock(job) ? { baseSalary: salaryBlock(job) } : {}),
     ...(job.workHours ? { workHours: job.workHours } : {}),
-    ...(job.externalUrl ? { hiringOrganizationUrl: job.externalUrl } : {}),
-    directApply: !!job.externalUrl,
+    ...(job.externalUrl ? { employmentUnit: { "@type": "Organization", url: job.externalUrl } } : {}), // optional: expose apply destination without invalid keys
+    directApply: Boolean(job.externalUrl),
   };
 
   return (
     <script
       type="application/ld+json"
-      // JSON.stringify once; no pretty-print (smaller HTML)
       dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
     />
   );

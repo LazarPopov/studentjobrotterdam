@@ -3,6 +3,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { listFeaturedJobs } from "@/data/jobs";
 import Image from "next/image";
+import FeaturedJobsAccordion from "@/components/FeaturedJobsAccordion";
+
 
 function JobCardLink({
   job,
@@ -26,7 +28,7 @@ function JobCardLink({
     <Link href={`/jobs/${job.slug}`} className={className}>
       {children}
     </Link>
-  );
+  );  
 }
 
 export const metadata: Metadata = {
@@ -149,8 +151,26 @@ export default function Page() {
         }}
       />
 
-      {/* HERO — switched from fixed height to min-height so it grows with the form on mobile */}
-      <section className="relative min-h-[520px] md:min-h-[480px] lg:min-h-[520px]">
+      <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      itemListElement: featuredJobs.map((job: any, index: number) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: job.externalUrl ? job.externalUrl : `https://studentjobsrotterdam.nl/jobs/${job.slug}`,
+        name: job.title,
+      })),
+    }),
+  }}
+/>
+
+      
+
+      {/* HERO with Featured Jobs inside */}
+      <section className="relative min-h-[620px] md:min-h-[560px] lg:min-h-[600px]">
         {/* Banner image */}
         <Image
           src="/rotterdam.jpg"
@@ -161,133 +181,122 @@ export default function Page() {
           className="object-cover"
         />
 
-        {/* Dark gradient overlay for readability */}
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/40 to-black/20" />
+        {/* Gradient overlay for readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/30" />
 
-        {/* Headline + search */}
+        {/* Headline + Featured Jobs */}
         <div className="relative z-10">
-          <div className="mx-auto max-w-6xl flex flex-col justify-center px-4 sm:px-6 py-8 md:py-12">
-            <h1 className="text-3xl md:text-5xl font-semibold text-white">
-              Student Jobs in Rotterdam (2025)
-            </h1>
-            <p className="mt-3 text-base md:text-xl text-white/90">
-              Part-time & English-friendly roles. Flexible hours. Updated daily.
-            </p>
-
-            {/* Search / Filters */}
-            <form
-              action="/jobs"
-              method="GET"
-              className="mt-5 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 rounded-2xl p-3 bg-white/95 backdrop-blur"
-            >
-              <label htmlFor="q" className="sr-only">
-                Search
-              </label>
-              <input
-                id="q"
-                name="q"
-                autoComplete="off"
-                placeholder="Search job title (e.g., barista, rider, tutor)"
-                className="w-full min-w-0 border rounded-xl px-4 py-3 bg-white text-slate-900 placeholder:text-slate-400"
-              />
-
-              <label htmlFor="category" className="sr-only">
-                Category
-              </label>
-              <select
-                id="category"
-                name="category"
-                className="w-full min-w-0 border rounded-xl px-4 py-3 bg-white text-slate-900"
+          <div className="mx-auto max-w-6xl px-4 sm:px-6 py-8 md:py-12">
+            <div className="flex items-start justify-between gap-4">
+              <div>
+                <h1 className="text-3xl md:text-5xl font-semibold text-white">
+                  Student Jobs in Rotterdam (2025)
+                </h1>
+                <p className="mt-3 text-base md:text-xl text-white/90 max-w-2xl">
+                  Part-time & English-friendly roles. Flexible hours. Updated daily.
+                </p>
+              </div>
+              <Link
+                href="/employers"
+                className="hidden md:inline-block text-sm underline text-white/90 hover:text-white"
               >
-                <option value="">All categories</option>
-                {categories.map((c) => (
-                  <option key={c.key} value={c.key}>
-                    {c.label}
-                  </option>
-                ))}
-              </select>
+                Are you a business? Feature your job →
+              </Link>
+            </div>
 
-              <label htmlFor="english" className="sr-only">
-                Language
-              </label>
-              <select
-                id="english"
-                name="english"
-                className="w-full min-w-0 border rounded-xl px-4 py-3 bg-white text-slate-900"
-              >
-                <option value="">Language: Any</option>
-                <option value="true">English-friendly</option>
-                <option value="false">Dutch required</option>
-              </select>
+            <div aria-label="Actively hiring" className="mt-6 md:mt-8">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl md:text-2xl font-semibold text-white">Actively hiring</h2>
+                <Link
+                  href="/employers"
+                  className="text-sm underline text-white/90 hover:text-white md:inline-block"
+                >
+                  Feature your job →
+                </Link>
+              </div>
 
-              <button
-                type="submit"
-                className="btn btn-primary w-full sm:col-span-2 md:col-span-1"
-              >
-                Find jobs
-              </button>
-            </form>
+              {/* Single-open accordion (mobile = column). This must replace all previous <details> blocks */}
+              <FeaturedJobsAccordion featuredJobs={featuredJobs} />
+            </div>
+          </div>
+
+          {/* Keep hero image behind content */}
+          <div className="pointer-events-none absolute inset-0 -z-10">
+            <Image
+              src="/rotterdam.jpg"
+              alt="Rotterdam skyline near the Erasmus Bridge"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/30" />
           </div>
         </div>
       </section>
 
-      {/* FEATURED JOBS (rank-and-rent slots) */}
-      <section className="px-6 py-6 md:py-10 bg-slate-50">
+      {/* SEARCH — moved below hero for clarity and mobile UX */}
+      <section className="px-4 sm:px-6 py-6 md:py-8 bg-white">
         <div className="mx-auto max-w-6xl">
-          <div className="flex items-end justify-between">
-            <h2 className="text-2xl md:text-3xl font-semibold">Featured jobs</h2>
-            <Link href="/employers" className="text-sm underline">
-              Are you a business? Feature your job →
-            </Link>
-          </div>
+          {/* (1) Helper text BEFORE the search bar */}
+          <p className="mb-3 md:mb-4 text-sm md:text-base text-slate-700">
+            Can’t find what you’re looking for?{" "}
+            <span className="font-semibold">Search in our database.</span>
+          </p>
 
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
-            {featuredJobs.map((job) => (
-              <JobCardLink
-                key={job.slug}
-                job={job}
-                className="card hover:shadow-md transition"
-              >
-                <div className="flex items-start justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className="relative h-10 w-10 rounded-lg bg-white border border-slate-200 overflow-hidden">
-                      {job.logoUrl ? (
-                        <Image
-                          src={job.logoUrl}
-                          alt={job.logoAlt || `${job.orgName} logo`}
-                          fill
-                          sizes="40px"
-                          className="object-contain"
-                        />
-                      ) : (
-                        <div className="h-full w-full flex items-center justify-center text-xs text-slate-500">
-                          {job.orgName?.[0] ?? "•"}
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <div className="text-lg font-semibold">{job.title}</div>
-                      <div className="text-slate-600">{job.orgName}</div>
-                    </div>
-                  </div>
-                  <div className="text-xs font-medium text-brand-700">
-                    Featured
-                  </div>
-                </div>
+          <form
+            aria-label="Search jobs"
+            action="/jobs"
+            method="GET"
+            className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-2 sm:gap-3 rounded-2xl p-3 border bg-white"
+          >
+            <label htmlFor="q" className="sr-only">
+              Search
+            </label>
+            <input
+              id="q"
+              name="q"
+              autoComplete="off"
+              placeholder="Search job title (e.g., barista, rider, tutor)"
+              className="w-full min-w-0 border rounded-xl px-4 py-3 bg-white text-slate-900 placeholder:text-slate-400"
+            />
 
-                <p className="mt-3 text-sm text-slate-700">
-                  {job.shortDescrition}
-                </p>
+            <label htmlFor="category" className="sr-only">
+              Category
+            </label>
+            <select
+              id="category"
+              name="category"
+              className="w-full min-w-0 border rounded-xl px-4 py-3 bg-white text-slate-900"
+            >
+              <option value="">All categories</option>
+              {categories.map((c) => (
+                <option key={c.key} value={c.key}>
+                  {c.label}
+                </option>
+              ))}
+            </select>
 
-                <div className="mt-3 text-sm text-slate-700">
-                  {job.area && <span className="mr-3">{job.area}</span>}
-                  {job.englishFriendly && (
-                    <span className="badge">English-friendly</span>
-                  )}
-                </div>
-              </JobCardLink>
-            ))}
-          </div>
+            <label htmlFor="english" className="sr-only">
+              Language
+            </label>
+            <select
+              id="english"
+              name="english"
+              className="w-full min-w-0 border rounded-xl px-4 py-3 bg-white text-slate-900"
+            >
+              <option value="">Language: Any</option>
+              <option value="true">English-friendly</option>
+              <option value="false">Dutch required</option>
+            </select>
+
+            <button
+              type="submit"
+              className="btn btn-primary w-full sm:col-span-2 md:col-span-1 rounded-xl px-4 py-3"
+            >
+              Find jobs
+            </button>
+          </form>
         </div>
       </section>
 
@@ -430,7 +439,7 @@ export default function Page() {
       <section className="px-6 py-6 md:py-10 bg-gray-50">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-2xl md:text-3xl font-semibold">Students say</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
             <div className="rounded-2xl border bg-white p-5">
               <div className="font-semibold">M., Erasmus student</div>
               <p className="text-gray-700 mt-2 text-sm">
@@ -457,7 +466,7 @@ export default function Page() {
       <section className="px-6 py-12">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-2xl md:text-3xl font-semibold">FAQ</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
             {faqs.map((f, i) => (
               <div key={i} className="rounded-2xl border p-5">
                 <div className="font-semibold">{f.q}</div>

@@ -28,6 +28,7 @@ export type JobRecord = {
   streetAddress?: string;
   area?: string;
   englishFriendly?: boolean;
+  DUO?: boolean;
   workHours?: string;
   datePosted: string;
   validThrough?: string;
@@ -93,13 +94,14 @@ type RawJob = Omit<JobRecord, "shortDescrition">;
 const RAW_JOBS: RawJob[] = [
   {
   slug: "thuisbezorgd-takeaway-courier-netherlands",
-  title: "Thuisbezorgd / Takeaway Courier (Food Delivery)",
+  title: "Food Delivery",
   orgName: "Thuisbezorgd.nl",
   descriptionHtml:
     "<p>Deliver meals from local restaurants to customers using your bike, scooter, or car. Choose your own schedule, earn hourly pay plus tips, and explore your city while working independently.</p><ul><li>Requirements: smartphone with data, vehicle (bike/scooter/car)</li><li>Hourly rate + tips + bonuses</li><li>Flexible working hours; choose your shifts</li></ul>",
   employmentType: "PART_TIME",
   baseSalaryMin: 12,
   baseSalaryMax: 15,
+  DUO: true,
   currency: "EUR",
   payUnit: "HOUR",
   addressLocality: "Rotterdam",
@@ -110,20 +112,21 @@ const RAW_JOBS: RawJob[] = [
   validThrough: "2025-12-31",
   categories: ["delivery", "fieldwork"],
   featured: true,
-  perGigAmount: 60, // average earning per delivery hour
+  perSaleAmountText: "14 euros per hour",
   logoUrl: "/logos/thuisbezorgd.png",
   logoAlt: "Thuisbezorgd.nl logo",
   externalUrl: "https://www.thuisbezorgd.nl/en/courier?city=blank&raf_id=478ba2228ffa17c8e591f221e022ffa2"
 },
     {
     slug: "pepperminds-door-to-door-sales-rotterdam",
-    title: "Pepperminds Door-to-Door Sales (Student Friendly)",
+    title: "Door-to-Door Sale",
     orgName: "Pepperminds",
     descriptionHtml:
       "<p>Join a dynamic field team to represent brands and charities across Rotterdam. Training, daily briefings, and performance-based bonuses.</p><ul><li>Travel between neighborhoods</li><li>Team-based shifts</li><li>Commission on results</li></ul>",
     employmentType: "PART_TIME",
     baseSalaryMin: 12,
     baseSalaryMax: 20,
+    DUO: true,
     currency: "EUR",
     payUnit: "HOUR",
     addressLocality: "Rotterdam",
@@ -168,7 +171,7 @@ const RAW_JOBS: RawJob[] = [
   },
   {
     slug: "domakin-room-finder-rotterdam",
-    title: "Domakin Room Finder (Student Housing Sourcing)",
+    title: "Room Finder",
     orgName: "Domakin",
     descriptionHtml:
       "<p>Source rooms and apartments compatible with student registration, verify details with landlords, and upload to our platform. Commission per successful listing and placement.</p><ul><li>Outbound messages & calls</li><li>Quality checks: registration, price, location</li><li>Great for social, persistent students</li></ul>",
@@ -193,7 +196,7 @@ const RAW_JOBS: RawJob[] = [
   },
   {
     slug: "rentswap-room-finder-rotterdam",
-    title: "RentSwap Room Finder (Outgoing Tenant Network)",
+    title: "Room Finder",
     orgName: "RentSwap",
     descriptionHtml:
       "<p>Work with leaving tenants to identify upcoming rooms, coordinate one-candidate viewings, and ensure smooth handovers. Training on scripts & verification provided.</p><ul><li>Lead tracking in CRM</li><li>Coordinate with landlords/tenants</li><li>Performance bonuses</li></ul>",
