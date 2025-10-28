@@ -96,9 +96,7 @@ const RAW_JOBS: RawJob[] = [
   slug: "thuisbezorgd-takeaway-courier-netherlands",
   title: "Food Delivery",
   orgName: "Thuisbezorgd.nl",
-  descriptionHtml:
-    "<p>Deliver meals from local restaurants to customers using your bike, scooter, or car. Choose your own schedule, earn hourly pay plus tips, and explore your city while working independently.</p><ul><li>Requirements: smartphone with data, vehicle (bike/scooter/car)</li><li>Hourly rate + tips + bonuses</li><li>Flexible working hours; choose your shifts</li></ul>",
-  employmentType: "PART_TIME",
+descriptionHtml: "<p><strong>Are you tired of endless study sessions and sitting behind your laptop all day?</strong> This job is your perfect excuse to get outside, stay active, and earn solid money while exploring your city! Join <strong>Thuisbezorgd.nl</strong> as a Food Delivery Courier — hop on your bike, scooter, or car, and deliver happiness (and food) straight to hungry customers.</p><ul><li><strong>Flexible schedule</strong> — choose your own working hours so you can balance lectures, gym time, and parties 🍕🚴‍♂️</li><li><strong>Reliable income</strong> — hourly pay + tips + bonuses (and yes, rainy-day deliveries pay even better 😉)</li><li><strong>DUO-friendly</strong> — work enough hours and you can qualify for <strong>study financing (DUO)</strong> while keeping your freedom!</li><li><strong>Requirements</strong> — smartphone with data and your own bike, scooter, or car</li><li><strong>Perfect for students</strong> — stay fit, meet people, and make money on your own schedule</li></ul><p>Ready to swap your desk for the open road? <strong>Join Thuisbezorgd.nl and start earning this week!</strong></p>",  employmentType: "PART_TIME",
   baseSalaryMin: 12,
   baseSalaryMax: 15,
   DUO: true,
@@ -119,12 +117,12 @@ const RAW_JOBS: RawJob[] = [
 },
     {
     slug: "pepperminds-door-to-door-sales-rotterdam",
-    title: "Door-to-Door Sale",
+    title: "Door-to-Door Sales",
     orgName: "Pepperminds",
+  
     descriptionHtml:
-      "<p>Join a dynamic field team to represent brands and charities across Rotterdam. Training, daily briefings, and performance-based bonuses.</p><ul><li>Travel between neighborhoods</li><li>Team-based shifts</li><li>Commission on results</li></ul>",
+     "<p><strong>Earn €150 per shift</strong> as part of Pepperminds’ door-to-door team in Rotterdam. We mix the <em>personal touch in a digital era</em> with energy, coaching, and paid training so you can grow fast and earn even faster.</p><ul><li><strong>Flexible schedule</strong> — Dutch is not required, and you can even receive DUO… if you work enough hours of course 😉</li><li><strong>The better you are, the more you earn!</strong> You start as a rookie, grow into a promoter, and can become a captain — with performance bonuses reaching up to <strong>€500 a day!</strong></li><li><strong>Learn real sales</strong> — your colleagues are students from all kinds of backgrounds, and together you’ll master the most versatile skill out there: sales!</li><li><strong>Challenge yourself</strong> — every day is different, full of teamwork, laughter, and growth.</li><li><strong>After work culture</strong> — we even have our own bar where the team celebrates wins and unwinds together!</li></ul><p>Ready to test your limits, make friends, and earn like a pro? <strong>Join the crew and start this week!</strong></p>",    baseSalaryMin: 12,
     employmentType: "PART_TIME",
-    baseSalaryMin: 12,
     baseSalaryMax: 20,
     DUO: true,
     currency: "EUR",
@@ -173,8 +171,7 @@ const RAW_JOBS: RawJob[] = [
     slug: "domakin-room-finder-rotterdam",
     title: "Room Finder",
     orgName: "Domakin",
-    descriptionHtml:
-      "<p>Source rooms and apartments compatible with student registration, verify details with landlords, and upload to our platform. Commission per successful listing and placement.</p><ul><li>Outbound messages & calls</li><li>Quality checks: registration, price, location</li><li>Great for social, persistent students</li></ul>",
+    descriptionHtml: "<p><strong>Do you want to help students who are struggling to find a place to live?</strong> Do you want to work in a growing startup that actually makes a difference — and looks amazing on your CV? Do you want to earn money, build connections, and have a real impact on how things operate? Then <strong>join the Domakin ‘for the win’ team!</strong></p><p>As a <strong>Room Finder</strong> at Domakin, you’ll help international students settle in the Netherlands by sourcing rooms and apartments that allow registration, verifying details with landlords, and uploading them to our platform. Every successful match helps another student find a home — and earns you <strong>€200 per sale!</strong></p><ul><li><strong>Citywide work</strong> — explore your city and connect with landlords</li><li><strong>English-friendly</strong> — perfect for international students</li><li><strong>Learn by doing</strong> — get startup experience that builds your business and communication skills</li><li><strong>Tasks</strong> — outbound calls & messages, quality checks (registration, price, location)</li><li><strong>Great for proactive, social, and persistent students</strong></li></ul><p><strong>How to apply:</strong> Shoot us a message through the contact form on our website — write <strong>“Domakin for the win</strong> along with your email, and we’ll reach out to schedule an interview. Type it with confidence — we’ll know it’s you 😉</p><p>Make an impact, grow your skills, and earn along the way — <strong>Domakin is waiting for you!</strong></p>", 
     employmentType: "PART_TIME",
     baseSalaryMin: 12,
     baseSalaryMax: 18,
@@ -198,10 +195,8 @@ const RAW_JOBS: RawJob[] = [
     slug: "rentswap-room-finder-rotterdam",
     title: "Room Finder",
     orgName: "RentSwap",
-    descriptionHtml:
-      "<p>Work with leaving tenants to identify upcoming rooms, coordinate one-candidate viewings, and ensure smooth handovers. Training on scripts & verification provided.</p><ul><li>Lead tracking in CRM</li><li>Coordinate with landlords/tenants</li><li>Performance bonuses</li></ul>",
+    descriptionHtml: "<p><strong>Do you already know someone who’s moving out — or maybe you’re leaving your own place soon?</strong> Then this is the perfect opportunity for you! Join <strong>RentSwap</strong>, a Rotterdam-based startup helping students and young professionals find rooms before they even hit the market.</p><p>As a <strong>Room Finder</strong>, you’ll work directly with leaving tenants to identify upcoming rooms, organize one-candidate viewings, and make sure everything is verified — from registration to rent and location. Each successful handover earns you <strong>€200</strong> and helps someone secure their new home.</p><ul><li><strong>Citywide work</strong> — explore Rotterdam while connecting with landlords and tenants</li><li><strong>Flexible hours</strong> — plan your work around your studies or other commitments</li><li><strong>English-friendly</strong> — ideal for international students and expats</li><li><strong>Training included</strong> — learn scripts, communication, and verification skills</li><li><strong>Great for social, proactive, and organized students</strong></li></ul><p><strong>How to apply:</strong> Go to our website and send a short message through the contact form with your email — we’ll reach out to plan your interview.</p><p>Help others find their next home and be part of a fast-growing Rotterdam startup — <strong>join RentSwap today!</strong></p>",    baseSalaryMin: 12,
     employmentType: "PART_TIME",
-    baseSalaryMin: 12,
     baseSalaryMax: 18,
     currency: "EUR",
     payUnit: "HOUR",
