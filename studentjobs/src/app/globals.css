@@ -62,4 +62,20 @@
 @layer utilities {
   .container-max { @apply mx-auto max-w-6xl; }
   .shadow-card   { box-shadow: var(--shadow-card); }
+
+  /* Toast animation */
+  @keyframes slide-in {
+    from {
+      transform: translateX(100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .animate-slide-in {
+    animation: slide-in 0.3s ease-out;
+  }
 }

@@ -1,7 +1,8 @@
 // src/app/employers/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
-import BackButton from "@/components/BackButton"; 
+import BackButton from "@/components/BackButton";
+import EmployerForm from "./EmployerForm";
 
 export const metadata: Metadata = {
   title: "Are you a business? Feature your job | Student Jobs Rotterdam",
@@ -9,26 +10,6 @@ export const metadata: Metadata = {
     "Hire students in Rotterdam. Feature your job on the homepage, category pages, and our weekly newsletter.",
   alternates: { canonical: "https://studentjobsrotterdam.nl/employers" },
 };
-
-const CATEGORIES = [
-  { key: "hospitality", label: "Hospitality" },
-  { key: "retail", label: "Retail" },
-  { key: "delivery", label: "Delivery" },
-  { key: "logistics", label: "Logistics" },
-  { key: "tutoring", label: "Tutoring" },
-  { key: "events", label: "Events" },
-  { key: "sales", label: "Sales" },
-  { key: "fieldwork", label: "Fieldwork" },
-];
-
-const EMPLOYMENT = [
-  "PART_TIME",
-  "FULL_TIME",
-  "CONTRACTOR",
-  "TEMPORARY",
-  "INTERN",
-  "VOLUNTEER",
-] as const;
 
 export default function EmployersPage() {
   return (
@@ -127,116 +108,7 @@ export default function EmployersPage() {
           <p className="mt-2 text-slate-700 text-sm">
             We review every role before it goes live (usually same day).
           </p>
-
-          <form action="/api/employer-lead" method="POST" className="mt-6 grid gap-4">
-            {/* spam honeypot */}
-            <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" />
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Company</label>
-                <input name="company" required className="border rounded-xl px-4 py-3" placeholder="Your company" />
-              </div>
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Contact name</label>
-                <input name="name" required className="border rounded-xl px-4 py-3" placeholder="Full name" />
-              </div>
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Email</label>
-                <input name="email" type="email" required className="border rounded-xl px-4 py-3" placeholder="you@company.com" />
-              </div>
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Phone (optional)</label>
-                <input name="phone" className="border rounded-xl px-4 py-3" placeholder="+31 ..." />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Job title</label>
-                <input name="title" required className="border rounded-xl px-4 py-3" placeholder="e.g., Barista (Part-Time)" />
-              </div>
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Employment type</label>
-                <select name="employmentType" required className="border rounded-xl px-4 py-3">
-                  {EMPLOYMENT.map((e) => (
-                    <option key={e} value={e}>{e.replaceAll("_", " ")}</option>
-                  ))}
-                </select>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Category</label>
-                <select name="category" required className="border rounded-xl px-4 py-3">
-                  {CATEGORIES.map((c) => (
-                    <option key={c.key} value={c.key}>{c.label}</option>
-                  ))}
-                </select>
-              </div>
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">City</label>
-                <input name="city" defaultValue="Rotterdam" className="border rounded-xl px-4 py-3" />
-              </div>
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Area / neighborhood (optional)</label>
-                <input name="area" className="border rounded-xl px-4 py-3" placeholder="Kralingen, Centrum, ..." />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-4">
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Pay (min €/h)</label>
-                <input name="baseSalaryMin" type="number" step="0.01" className="border rounded-xl px-4 py-3" />
-              </div>
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Pay (max €/h)</label>
-                <input name="baseSalaryMax" type="number" step="0.01" className="border rounded-xl px-4 py-3" />
-              </div>
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">External apply URL (optional)</label>
-                <input name="externalUrl" className="border rounded-xl px-4 py-3" placeholder="https://…" />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Logo URL (optional)</label>
-                <input name="logoUrl" className="border rounded-xl px-4 py-3" placeholder="/logos/company.png or https://…" />
-              </div>
-              <div className="grid gap-2">
-                <label className="text-sm font-medium">Logo alt text</label>
-                <input name="logoAlt" className="border rounded-xl px-4 py-3" placeholder="Company logo" />
-              </div>
-            </div>
-
-            <div className="grid gap-2">
-              <label className="text-sm font-medium">Job description</label>
-              <textarea
-                name="description"
-                required
-                rows={6}
-                className="border rounded-xl px-4 py-3"
-                placeholder="Responsibilities, hours, requirements, how to apply…"
-              />
-              <p className="text-xs text-slate-500">
-                You can paste plain text. We’ll format it when publishing.
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <input id="englishFriendly" type="checkbox" name="englishFriendly" className="h-4 w-4" />
-              <label htmlFor="englishFriendly" className="text-sm">English-friendly role</label>
-            </div>
-
-            <div className="mt-2">
-              <button className="btn btn-primary" type="submit">Submit job</button>
-              <span className="ml-3 text-xs text-slate-500">
-                By submitting you agree to our publishing guidelines.
-              </span>
-            </div>
-          </form>
+          <EmployerForm />
         </div>
       </section>
 
