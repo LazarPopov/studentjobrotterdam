@@ -5,7 +5,6 @@ import { listFeaturedJobs } from "@/data/jobs";
 import Image from "next/image";
 import FeaturedJobsAccordion from "@/components/FeaturedJobsAccordion";
 
-
 function JobCardLink({
   job,
   className,
@@ -21,14 +20,23 @@ function JobCardLink({
       target="_blank"
       rel="noopener noreferrer"
       className={className}
+      data-gtm-event="job_card_click"
+      data-gtm-label="external"
+      data-gtm-prop-slug={job.slug}
     >
       {children}
     </a>
   ) : (
-    <Link href={`/jobs/${job.slug}`} className={className}>
+    <Link
+      href={`/jobs/${job.slug}`}
+      className={className}
+      data-gtm-event="job_card_click"
+      data-gtm-label="internal"
+      data-gtm-prop-slug={job.slug}
+    >
       {children}
     </Link>
-  );  
+  );
 }
 
 export const metadata: Metadata = {
@@ -152,22 +160,22 @@ export default function Page() {
       />
 
       <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify({
-      "@context": "https://schema.org",
-      "@type": "ItemList",
-      itemListElement: featuredJobs.map((job: any, index: number) => ({
-        "@type": "ListItem",
-        position: index + 1,
-        url: job.externalUrl ? job.externalUrl : `https://studentjobsrotterdam.nl/jobs/${job.slug}`,
-        name: job.title,
-      })),
-    }),
-  }}
-/>
-
-      
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            itemListElement: featuredJobs.map((job: any, index: number) => ({
+              "@type": "ListItem",
+              position: index + 1,
+              url: job.externalUrl
+                ? job.externalUrl
+                : `https://studentjobsrotterdam.nl/jobs/${job.slug}`,
+              name: job.title,
+            })),
+          }),
+        }}
+      />
 
       {/* HERO with Featured Jobs inside */}
       <section className="relative min-h-[620px] md:min-h-[560px] lg:min-h-[600px]">
@@ -199,6 +207,8 @@ export default function Page() {
               <Link
                 href="/employers"
                 className="hidden md:inline-block text-sm underline text-white/90 hover:text-white"
+                data-gtm-event="cta_business"
+                data-gtm-label="hero_top"
               >
                 Are you a business? Feature your job →
               </Link>
@@ -206,10 +216,14 @@ export default function Page() {
 
             <div aria-label="Actively hiring" className="mt-6 md:mt-8">
               <div className="flex items-center justify-between">
-                <h2 className="text-xl md:text-2xl font-semibold text-white">Actively hiring</h2>
+                <h2 className="text-xl md:text-2xl font-semibold text-white">
+                  Actively hiring
+                </h2>
                 <Link
                   href="/employers"
                   className="text-sm underline text-white/90 hover:text-white md:inline-block"
+                  data-gtm-event="cta_business"
+                  data-gtm-label="actively_hiring_bar"
                 >
                   Feature your job →
                 </Link>
@@ -293,6 +307,9 @@ export default function Page() {
             <button
               type="submit"
               className="btn btn-primary w-full sm:col-span-2 md:col-span-1 rounded-xl px-4 py-3"
+              data-gtm-event="search"
+              data-gtm-label="hero_find_jobs"
+              data-gtm-collect="query:#q,category:#category,language:#english"
             >
               Find jobs
             </button>
@@ -335,6 +352,8 @@ export default function Page() {
                 key={c.key}
                 href={`/categories/${c.key}`}
                 className="rounded-2xl border bg-white p-5 hover:shadow-md transition"
+                data-gtm-event="browse_category"
+                data-gtm-label={c.key}
               >
                 <div className="text-lg font-semibold">{c.label}</div>
                 <div className="text-gray-600 text-sm mt-1">
@@ -360,7 +379,12 @@ export default function Page() {
                 <li>• Newsletter & blog embeds available</li>
               </ul>
               <div className="mt-6 flex gap-3">
-                <Link href="/employers" className="rounded-xl px-5 py-3 border">
+                <Link
+                  href="/employers"
+                  className="rounded-xl px-5 py-3 border"
+                  data-gtm-event="cta_business"
+                  data-gtm-label="employer_section_learn_more"
+                >
                   Learn more
                 </Link>
               </div>
@@ -387,6 +411,8 @@ export default function Page() {
                 key={post.slug}
                 href={`/blog/${post.slug}`}
                 className="rounded-2xl border bg-white p-5 hover:shadow-md transition"
+                data-gtm-event="blog_open"
+                data-gtm-label={post.slug}
               >
                 <div className="text-lg font-semibold">{post.title}</div>
                 <p className="text-gray-600 text-sm mt-2">{post.excerpt}</p>
@@ -428,6 +454,8 @@ export default function Page() {
             <button
               className="rounded-xl px-4 py-3 border bg-black text-white"
               type="submit"
+              data-gtm-event="newsletter_subscribe"
+              data-gtm-label="homepage_weekly"
             >
               Subscribe
             </button>
@@ -439,7 +467,7 @@ export default function Page() {
       <section className="px-6 py-6 md:py-10 bg-gray-50">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-2xl md:text-3xl font-semibold">Students say</h2>
-        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="mt-6 grid gap-4 md:grid-cols-3">
             <div className="rounded-2xl border bg-white p-5">
               <div className="font-semibold">M., Erasmus student</div>
               <p className="text-gray-700 mt-2 text-sm">
@@ -476,7 +504,7 @@ export default function Page() {
           </div>
           <div className="mt-6 text-sm">
             Questions about a listing?{" "}
-            <Link href="/contact" className="underline">
+            <Link href="/contact" className="underline" data-gtm-event="contact_open" data-gtm-label="faq_footer">
               Contact us
             </Link>
             .

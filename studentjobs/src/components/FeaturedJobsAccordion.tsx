@@ -23,11 +23,29 @@ export default function FeaturedJobsAccordion({ featuredJobs }: { featuredJobs: 
   const [openSlug, setOpenSlug] = useState<string | null>(null);
   const uid = useId();
 
-  const handleToggle = (slug: string) => {
-    setOpenSlug((prev) => (prev === slug ? null : slug));
+  // --- GTM helper: push a custom event to the dataLayer
+  const gtm = (event: string, params: Record<string, any> = {}) => {
+    if (typeof window === "undefined") return;
+    // @ts-ignore
+    window.dataLayer = window.dataLayer || [];
+    // @ts-ignore
+    window.dataLayer.push({ event, ...params });
+  };
+
+  const handleToggle = (job: Job) => {
+    const willOpen = openSlug !== job.slug;
+    setOpenSlug((prev) => (prev === job.slug ? null : job.slug));
+
+    // fire GTM event
+    gtm(willOpen ? "job_expand" : "job_collapse", {
+      slug: job.slug,
+      title: job.title,
+      org: job.orgName || "",
+    });
+
     // Smoothly bring the opened panel into view on small screens
-    if (openSlug !== slug && typeof window !== "undefined") {
-      const el = document.getElementById(`${uid}-${slug}-panel`);
+    if (willOpen && typeof window !== "undefined") {
+      const el = document.getElementById(`${uid}-${job.slug}-panel`);
       setTimeout(() => el?.scrollIntoView({ behavior: "smooth", block: "start" }), 0);
     }
   };
@@ -86,7 +104,7 @@ export default function FeaturedJobsAccordion({ featuredJobs }: { featuredJobs: 
                   English-friendly
                 </span>
               )}
-            {job.DUO && (
+              {job.DUO && (
                 <span className="inline-flex items-center rounded-full border px-2 py-0.5">
                   Works with DUO
                 </span>
@@ -97,10 +115,14 @@ export default function FeaturedJobsAccordion({ featuredJobs }: { featuredJobs: 
             <div className="mt-3">
               <button
                 type="button"
-                onClick={() => handleToggle(job.slug)}
+                onClick={() => handleToggle(job)}
                 aria-expanded={isOpen}
                 aria-controls={panelId}
                 className="text-sm underline underline-offset-2"
+                data-gtm-event={isOpen ? "job_collapse" : "job_expand"} // optional for GTM delegation
+                data-gtm-label={job.title}
+                data-gtm-prop-slug={job.slug}
+                data-gtm-prop-org={job.orgName || ""}
               >
                 {isOpen ? "Hide details" : "Learn more"}
               </button>
@@ -125,6 +147,18 @@ export default function FeaturedJobsAccordion({ featuredJobs }: { featuredJobs: 
                       target="_blank"
                       rel="noopener noreferrer"
                       className="inline-flex items-center justify-center rounded-xl px-4 py-2 border bg-black text-white text-sm"
+                      onClick={() =>
+                        gtm("job_apply", {
+                          slug: job.slug,
+                          title: job.title,
+                          org: job.orgName || "",
+                          destination: "external",
+                        })
+                      }
+                      data-gtm-event="job_apply"
+                      data-gtm-label={job.title}
+                      data-gtm-prop-slug={job.slug}
+                      data-gtm-prop-org={job.orgName || ""}
                     >
                       Apply
                     </a>
@@ -132,6 +166,18 @@ export default function FeaturedJobsAccordion({ featuredJobs }: { featuredJobs: 
                     <Link
                       href={`/jobs/${job.slug}`}
                       className="inline-flex items-center justify-center rounded-xl px-4 py-2 border bg-black text-white text-sm"
+                      onClick={() =>
+                        gtm("job_apply", {
+                          slug: job.slug,
+                          title: job.title,
+                          org: job.orgName || "",
+                          destination: "internal",
+                        })
+                      }
+                      data-gtm-event="job_apply"
+                      data-gtm-label={job.title}
+                      data-gtm-prop-slug={job.slug}
+                      data-gtm-prop-org={job.orgName || ""}
                     >
                       Apply
                     </Link>
