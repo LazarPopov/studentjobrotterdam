@@ -13,25 +13,13 @@ export const metadata: Metadata = {
 };
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-WT8SB7T6";
+const GA4_ID = process.env.NEXT_PUBLIC_GA4_ID || "G-Y6XXRPF6QB";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         {/* GTM loader (head) */}
-
-
-
-        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6XXRPF6QB"></script>
-        <script>
-          window.dataLayer = window.dataLayer || [];
-          function gtag(){dataLayer.push(arguments);}
-          gtag('js', new Date());
-
-          gtag('config', 'G-Y6XXRPF6QB');
-        </script>
-
-
         <Script id="gtm-base" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
@@ -40,6 +28,20 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','${GTM_ID}');
+          `}
+        </Script>
+
+        {/* GA4 gtag.js (direct) */}
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${GA4_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="ga4-base" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${GA4_ID}');
           `}
         </Script>
 
