@@ -19,6 +19,19 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en">
       <head>
         {/* GTM loader (head) */}
+
+
+
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-Y6XXRPF6QB"></script>
+        <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+
+          gtag('config', 'G-Y6XXRPF6QB');
+        </script>
+
+
         <Script id="gtm-base" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
