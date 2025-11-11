@@ -1,3 +1,4 @@
+// src/app/employers/EmployerForm.tsx
 "use client";
 
 import { useState, useRef, FormEvent, ChangeEvent } from "react";
@@ -28,22 +29,68 @@ interface FieldErrors {
   [key: string]: string;
 }
 
-const ALLOWED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+const ALLOWED_IMAGE_TYPES = ["image/jpeg", "image/jpg", "image/png", "image/webp"];
 const MAX_FILE_SIZE = 2 * 1024 * 1024; // 2MB
+
+// ✅ Pricing plans (all 30 days). Put your real numbers for X/Y when ready.
+const PRICING_PLANS = [
+  {
+    key: "basic",
+    name: "Basic",
+    price: 25,
+    label: "€25",
+    perks: [
+      "Appears in category & search",
+      "External apply link (ATS/website)",
+      "Company logo on card",
+      "Standard moderation (within 24h)",
+    ],
+  },
+  {
+    key: "featured",
+    name: "Featured",
+    price: "120",
+    label: "€120",
+    perks: [
+      "Homepage Featured row (rotates)",
+      "Pinned in category",
+      "1× Newsletter inclusion",
+      "Priority moderation (same-day)",
+      "Performance snapshot (7 & 14 days)",
+    ],
+  },
+  {
+    key: "premium",
+    name: "Premium",
+    price: "",
+    label: "€300",
+    perks: [
+      "Homepage Featured row (higher rotation)",
+      "2× Newsletter inclusions (weeks 1 & 3)",
+      "Social post shout-out",
+      "Re-feature boost if under-performing",
+      "Invoice/Bulk support (multiple roles)",
+    ],
+  },
+] as const;
 
 export default function EmployerForm() {
   const router = useRouter();
   const formRef = useRef<HTMLFormElement>(null);
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [toast, setToast] = useState<{ type: "success" | "error"; message: string } | null>(null);
   const [fieldErrors, setFieldErrors] = useState<FieldErrors>({});
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
 
+  // ✅ plan selection (defaults to Basic)
+  const [selectedPlan, setSelectedPlan] =
+    useState<"basic" | "featured" | "premium">("basic");
+
   const validateFile = (file: File): string => {
     if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
-      return `Invalid file type. Allowed types: ${ALLOWED_IMAGE_TYPES.join(', ')}`;
+      return `Invalid file type. Allowed types: ${ALLOWED_IMAGE_TYPES.join(", ")}`;
     }
     if (file.size > MAX_FILE_SIZE) {
       return `File size must be less than ${MAX_FILE_SIZE / 1024 / 1024}MB`;
@@ -56,7 +103,7 @@ export default function EmployerForm() {
     if (!file) {
       setLogoFile(null);
       setLogoPreview(null);
-      setFieldErrors(prev => {
+      setFieldErrors((prev) => {
         const updated = { ...prev };
         delete updated.logo;
         return updated;
@@ -66,15 +113,15 @@ export default function EmployerForm() {
 
     const error = validateFile(file);
     if (error) {
-      setFieldErrors(prev => ({ ...prev, logo: error }));
+      setFieldErrors((prev) => ({ ...prev, logo: error }));
       setLogoFile(null);
       setLogoPreview(null);
-      e.target.value = ''; // Reset file input
+      e.target.value = ""; // Reset file input
       return;
     }
 
     setLogoFile(file);
-    setFieldErrors(prev => {
+    setFieldErrors((prev) => {
       const updated = { ...prev };
       delete updated.logo;
       return updated;
@@ -102,8 +149,7 @@ export default function EmployerForm() {
         break;
       case "email":
         if (!value.trim()) return "Email is required";
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        if (!emailRegex.test(value)) return "Please enter a valid email address";
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) return "Please enter a valid email address";
         break;
       case "phone":
         if (value && value.length > 0 && value.length < 8) return "Please enter a valid phone number";
@@ -133,11 +179,13 @@ export default function EmployerForm() {
     return "";
   };
 
-  const handleFieldChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleFieldChange = (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
     const { name, value } = e.target;
     const error = validateField(name, value);
-    
-    setFieldErrors(prev => {
+
+    setFieldErrors((prev) => {
       const updated = { ...prev };
       if (error) {
         updated[name] = error;
@@ -150,7 +198,7 @@ export default function EmployerForm() {
 
   const validateForm = (formData: FormData): boolean => {
     const errors: FieldErrors = {};
-    
+
     // Validate all required fields
     const company = formData.get("company") as string;
     const name = formData.get("name") as string;
@@ -195,22 +243,35 @@ export default function EmployerForm() {
 
     try {
       const formData = new FormData(e.currentTarget);
-      
+
+      // ✅ Include selected plan in submission
+      formData.append("plan", selectedPlan);
+      const planMeta = PRICING_PLANS.find((p) => p.key === selectedPlan);
+      if (planMeta) {
+        const price = planMeta.price;
+        if (typeof price === "number") {
+          formData.append("plan_price_eur", String(price));
+        } else {
+          // Keep placeholder X/Y if you haven’t set numbers yet
+          formData.append("plan_price_eur", String(price));
+        }
+      }
+
       // Add logo file if present
       if (logoFile) {
         formData.append("logo", logoFile);
       }
-      
+
       // Client-side validation
       if (!validateForm(formData)) {
-        setToast({ 
-          type: "error", 
-          message: "Please fix the errors in the form before submitting" 
+        setToast({
+          type: "error",
+          message: "Please fix the errors in the form before submitting",
         });
         setIsSubmitting(false);
         return;
       }
-      
+
       const response = await fetch("/api/employer-lead", {
         method: "POST",
         body: formData,
@@ -222,19 +283,19 @@ export default function EmployerForm() {
       }
 
       // Success!
-      setToast({ 
-        type: "success", 
-        message: "Job submitted successfully! We'll review it shortly." 
+      setToast({
+        type: "success",
+        message: "Job submitted successfully! We'll review it shortly.",
       });
       formRef.current?.reset();
       setFieldErrors({});
       setLogoFile(null);
       setLogoPreview(null);
-
+      setSelectedPlan("basic");
     } catch (err) {
-      setToast({ 
-        type: "error", 
-        message: err instanceof Error ? err.message : "An unexpected error occurred" 
+      setToast({
+        type: "error",
+        message: err instanceof Error ? err.message : "An unexpected error occurred",
       });
     } finally {
       setIsSubmitting(false);
@@ -245,67 +306,113 @@ export default function EmployerForm() {
     <>
       {/* Toast Notification */}
       {toast && (
-        <Toast 
-          type={toast.type} 
-          message={toast.message} 
-          onClose={() => setToast(null)} 
-        />
+        <Toast type={toast.type} message={toast.message} onClose={() => setToast(null)} />
       )}
 
-      <form ref={formRef} onSubmit={handleSubmit} className="mt-6 grid gap-4">
+      <form ref={formRef} onSubmit={handleSubmit} className="mt-6 grid gap-6">
+        {/* ✅ Selectable pricing (radio-cards) */}
+        <fieldset className="grid gap-4 md:grid-cols-3">
+          {PRICING_PLANS.map((p) => (
+            <label
+              key={p.key}
+              className={`relative block rounded-3xl border p-6 md:p-8 cursor-pointer transition ${
+                selectedPlan === p.key ? "ring-2 ring-emerald-500" : ""
+              }`}
+            >
+              <input
+                type="radio"
+                name="plan_radio"
+                value={p.key}
+                checked={selectedPlan === p.key}
+                onChange={() =>
+                  setSelectedPlan(p.key as "basic" | "featured" | "premium")
+                }
+                className="sr-only"
+              />
+              <div className="text-sm text-slate-600">{p.name}</div>
+              <div className="mt-1 text-2xl font-semibold">{p.label}</div>
+              <div className="text-slate-500 text-sm">30-day listing</div>
+              <ul className="mt-3 text-slate-700 text-sm space-y-2">
+                {p.perks.map((perk) => (
+                  <li key={perk}>• {perk}</li>
+                ))}
+              </ul>
+              <div className="mt-4 inline-flex items-center gap-2 text-sm text-emerald-700">
+                Click to select
+              </div>
+            </label>
+          ))}
+        </fieldset>
+
         {/* spam honeypot */}
         <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" />
 
         <div className="grid md:grid-cols-2 gap-4">
           <div className="grid gap-2">
-            <label className="text-sm font-medium">Company <span className="text-red-500">*</span></label>
-            <input 
-              name="company" 
-              required 
+            <label className="text-sm font-medium">
+              Company <span className="text-red-500">*</span>
+            </label>
+            <input
+              name="company"
+              required
               disabled={isSubmitting}
               maxLength={100}
               onChange={handleFieldChange}
-              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${fieldErrors.company ? 'border-red-500' : ''}`}
-              placeholder="Your company" 
+              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${
+                fieldErrors.company ? "border-red-500" : ""
+              }`}
+              placeholder="Your company"
             />
-            {fieldErrors.company && <p className="text-xs text-red-600">{fieldErrors.company}</p>}
+            {fieldErrors.company && (
+              <p className="text-xs text-red-600">{fieldErrors.company}</p>
+            )}
           </div>
           <div className="grid gap-2">
-            <label className="text-sm font-medium">Contact name <span className="text-red-500">*</span></label>
-            <input 
-              name="name" 
-              required 
+            <label className="text-sm font-medium">
+              Contact name <span className="text-red-500">*</span>
+            </label>
+            <input
+              name="name"
+              required
               disabled={isSubmitting}
               maxLength={100}
               onChange={handleFieldChange}
-              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${fieldErrors.name ? 'border-red-500' : ''}`}
-              placeholder="Full name" 
+              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${
+                fieldErrors.name ? "border-red-500" : ""
+              }`}
+              placeholder="Full name"
             />
             {fieldErrors.name && <p className="text-xs text-red-600">{fieldErrors.name}</p>}
           </div>
           <div className="grid gap-2">
-            <label className="text-sm font-medium">Email <span className="text-red-500">*</span></label>
-            <input 
-              name="email" 
-              type="email" 
-              required 
+            <label className="text-sm font-medium">
+              Email <span className="text-red-500">*</span>
+            </label>
+            <input
+              name="email"
+              type="email"
+              required
               disabled={isSubmitting}
               onChange={handleFieldChange}
-              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${fieldErrors.email ? 'border-red-500' : ''}`}
-              placeholder="you@company.com" 
+              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${
+                fieldErrors.email ? "border-red-500" : ""
+              }`}
+              placeholder="you@company.com"
             />
             {fieldErrors.email && <p className="text-xs text-red-600">{fieldErrors.email}</p>}
           </div>
           <div className="grid gap-2">
             <label className="text-sm font-medium">Phone (optional)</label>
-            <input 
-              name="phone" 
+            <input
+              name="phone"
               disabled={isSubmitting}
               type="tel"
               maxLength={20}
               onChange={handleFieldChange}
-              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${fieldErrors.phone ? 'border-red-500' : ''}`}
-              placeholder="+31 ..." 
+              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${
+                fieldErrors.phone ? "border-red-500" : ""
+              }`}
+              placeholder="+31 ..."
             />
             {fieldErrors.phone && <p className="text-xs text-red-600">{fieldErrors.phone}</p>}
           </div>
@@ -313,28 +420,36 @@ export default function EmployerForm() {
 
         <div className="grid md:grid-cols-2 gap-4">
           <div className="grid gap-2">
-            <label className="text-sm font-medium">Job title <span className="text-red-500">*</span></label>
-            <input 
-              name="title" 
-              required 
+            <label className="text-sm font-medium">
+              Job title <span className="text-red-500">*</span>
+            </label>
+            <input
+              name="title"
+              required
               disabled={isSubmitting}
               maxLength={150}
               onChange={handleFieldChange}
-              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${fieldErrors.title ? 'border-red-500' : ''}`}
-              placeholder="e.g., Barista (Part-Time)" 
+              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${
+                fieldErrors.title ? "border-red-500" : ""
+              }`}
+              placeholder="e.g., Barista (Part-Time)"
             />
             {fieldErrors.title && <p className="text-xs text-red-600">{fieldErrors.title}</p>}
           </div>
           <div className="grid gap-2">
-            <label className="text-sm font-medium">Employment type <span className="text-red-500">*</span></label>
-            <select 
-              name="employmentType" 
-              required 
+            <label className="text-sm font-medium">
+              Employment type <span className="text-red-500">*</span>
+            </label>
+            <select
+              name="employmentType"
+              required
               disabled={isSubmitting}
               className="border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500"
             >
               {EMPLOYMENT.map((e) => (
-                <option key={e} value={e}>{e.replaceAll("_", " ")}</option>
+                <option key={e} value={e}>
+                  {e.replaceAll("_", " ")}
+                </option>
               ))}
             </select>
           </div>
@@ -342,37 +457,43 @@ export default function EmployerForm() {
 
         <div className="grid md:grid-cols-3 gap-4">
           <div className="grid gap-2">
-            <label className="text-sm font-medium">Category <span className="text-red-500">*</span></label>
-            <select 
-              name="category" 
-              required 
+            <label className="text-sm font-medium">
+              Category <span className="text-red-500">*</span>
+            </label>
+            <select
+              name="category"
+              required
               disabled={isSubmitting}
               className="border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500"
             >
               {CATEGORIES.map((c) => (
-                <option key={c.key} value={c.key}>{c.label}</option>
+                <option key={c.key} value={c.key}>
+                  {c.label}
+                </option>
               ))}
             </select>
           </div>
           <div className="grid gap-2">
-            <label className="text-sm font-medium">City <span className="text-red-500">*</span></label>
-            <input 
-              name="city" 
+            <label className="text-sm font-medium">
+              City <span className="text-red-500">*</span>
+            </label>
+            <input
+              name="city"
               required
-              defaultValue="Rotterdam" 
+              defaultValue="Rotterdam"
               disabled={isSubmitting}
               maxLength={100}
-              className="border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500" 
+              className="border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500"
             />
           </div>
           <div className="grid gap-2">
             <label className="text-sm font-medium">Area / neighborhood (optional)</label>
-            <input 
-              name="area" 
+            <input
+              name="area"
               disabled={isSubmitting}
               maxLength={100}
-              className="border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500" 
-              placeholder="Kralingen, Centrum, ..." 
+              className="border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500"
+              placeholder="Kralingen, Centrum, ..."
             />
           </div>
         </div>
@@ -380,45 +501,57 @@ export default function EmployerForm() {
         <div className="grid md:grid-cols-3 gap-4">
           <div className="grid gap-2">
             <label className="text-sm font-medium">Pay (min €/h)</label>
-            <input 
-              name="baseSalaryMin" 
-              type="number" 
+            <input
+              name="baseSalaryMin"
+              type="number"
               step="0.01"
               min="0"
               max="999"
               disabled={isSubmitting}
               onChange={handleFieldChange}
-              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${fieldErrors.baseSalaryMin ? 'border-red-500' : ''}`}
+              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${
+                fieldErrors.baseSalaryMin ? "border-red-500" : ""
+              }`}
               placeholder="e.g., 12.50"
             />
-            {fieldErrors.baseSalaryMin && <p className="text-xs text-red-600">{fieldErrors.baseSalaryMin}</p>}
+            {fieldErrors.baseSalaryMin && (
+              <p className="text-xs text-red-600">{fieldErrors.baseSalaryMin}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <label className="text-sm font-medium">Pay (max €/h)</label>
-            <input 
-              name="baseSalaryMax" 
-              type="number" 
+            <input
+              name="baseSalaryMax"
+              type="number"
               step="0.01"
               min="0"
               max="999"
               disabled={isSubmitting}
               onChange={handleFieldChange}
-              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${fieldErrors.baseSalaryMax ? 'border-red-500' : ''}`}
+              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${
+                fieldErrors.baseSalaryMax ? "border-red-500" : ""
+              }`}
               placeholder="e.g., 15.00"
             />
-            {fieldErrors.baseSalaryMax && <p className="text-xs text-red-600">{fieldErrors.baseSalaryMax}</p>}
+            {fieldErrors.baseSalaryMax && (
+              <p className="text-xs text-red-600">{fieldErrors.baseSalaryMax}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <label className="text-sm font-medium">External apply URL (optional)</label>
-            <input 
-              name="externalUrl" 
+            <input
+              name="externalUrl"
               type="url"
               disabled={isSubmitting}
               onChange={handleFieldChange}
-              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${fieldErrors.externalUrl ? 'border-red-500' : ''}`}
-              placeholder="https://…" 
+              className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${
+                fieldErrors.externalUrl ? "border-red-500" : ""
+              }`}
+              placeholder="https://…"
             />
-            {fieldErrors.externalUrl && <p className="text-xs text-red-600">{fieldErrors.externalUrl}</p>}
+            {fieldErrors.externalUrl && (
+              <p className="text-xs text-red-600">{fieldErrors.externalUrl}</p>
+            )}
           </div>
         </div>
 
@@ -426,15 +559,13 @@ export default function EmployerForm() {
           <div className="grid gap-2">
             <label className="text-sm font-medium">
               Company Logo (optional)
-              <span className="text-xs text-slate-500 ml-2">
-                (Max 2MB, JPG/PNG/WebP)
-              </span>
+              <span className="text-xs text-slate-500 ml-2">(Max 2MB, JPG/PNG/WebP)</span>
             </label>
             <div className="flex items-start gap-4">
               <div className="flex-1">
-                <input 
+                <input
                   type="file"
-                  accept={ALLOWED_IMAGE_TYPES.join(',')}
+                  accept={ALLOWED_IMAGE_TYPES.join(",")}
                   onChange={handleFileChange}
                   disabled={isSubmitting}
                   className={`
@@ -446,32 +577,30 @@ export default function EmployerForm() {
                     hover:file:bg-brand-100
                     file:cursor-pointer
                     disabled:opacity-50 disabled:cursor-not-allowed
-                    ${fieldErrors.logo ? 'text-red-600' : ''}
+                    ${fieldErrors.logo ? "text-red-600" : ""}
                   `}
                 />
-                {fieldErrors.logo && <p className="mt-1 text-xs text-red-600">{fieldErrors.logo}</p>}
+                {fieldErrors.logo && (
+                  <p className="mt-1 text-xs text-red-600">{fieldErrors.logo}</p>
+                )}
                 <p className="mt-1 text-xs text-slate-500">
                   Recommended: Square image, at least 200x200px
                 </p>
               </div>
               {logoPreview && (
                 <div className="relative h-20 w-20 rounded-xl border-2 border-slate-200 overflow-hidden bg-white">
-                  <img 
-                    src={logoPreview} 
-                    alt="Logo preview" 
-                    className="w-full h-full object-contain p-2"
-                  />
+                  <img src={logoPreview} alt="Logo preview" className="w-full h-full object-contain p-2" />
                 </div>
               )}
             </div>
           </div>
           <div className="grid gap-2">
             <label className="text-sm font-medium">Logo description (for accessibility)</label>
-            <input 
-              name="logoAlt" 
+            <input
+              name="logoAlt"
               disabled={isSubmitting}
               maxLength={200}
-              className="border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500" 
+              className="border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500"
               placeholder="e.g., Acme Company logo"
             />
           </div>
@@ -490,37 +619,52 @@ export default function EmployerForm() {
             maxLength={5000}
             disabled={isSubmitting}
             onChange={handleFieldChange}
-            className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${fieldErrors.description ? 'border-red-500' : ''}`}
+            className={`border rounded-xl px-4 py-3 disabled:bg-slate-50 disabled:text-slate-500 ${
+              fieldErrors.description ? "border-red-500" : ""
+            }`}
             placeholder="Responsibilities, hours, requirements, how to apply…"
           />
-          {fieldErrors.description && <p className="text-xs text-red-600">{fieldErrors.description}</p>}
+          {fieldErrors.description && (
+            <p className="text-xs text-red-600">{fieldErrors.description}</p>
+          )}
           <p className="text-xs text-slate-500">
             You can paste plain text. We'll format it when publishing.
           </p>
         </div>
 
         <div className="flex items-center gap-2">
-          <input 
-            id="englishFriendly" 
-            type="checkbox" 
-            name="englishFriendly" 
+          <input
+            id="englishFriendly"
+            type="checkbox"
+            name="englishFriendly"
             disabled={isSubmitting}
-            className="h-4 w-4 disabled:opacity-50" 
+            className="h-4 w-4 disabled:opacity-50"
           />
-          <label htmlFor="englishFriendly" className="text-sm">English-friendly role</label>
+          <label htmlFor="englishFriendly" className="text-sm">
+            English-friendly role
+          </label>
         </div>
 
         <div className="mt-2">
-          <button 
-            className="btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed" 
+          <button
+            className="btn btn-primary disabled:opacity-50 disabled:cursor-not-allowed"
             type="submit"
             disabled={isSubmitting}
           >
             {isSubmitting ? (
               <span className="flex items-center gap-2">
-                <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <svg
+                  className="animate-spin h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                >
                   <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                  <path
+                    className="opacity-75"
+                    fill="currentColor"
+                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                  ></path>
                 </svg>
                 Submitting...
               </span>
@@ -536,4 +680,3 @@ export default function EmployerForm() {
     </>
   );
 }
-

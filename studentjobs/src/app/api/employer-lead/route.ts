@@ -9,16 +9,22 @@ export async function POST(req: Request) {
   try {
     const form = await req.formData();
 
-    // Honeypot spam protection (silently accept but don't save)
+    // Honeypot
     if (form.get("website")) {
-      // Return success to avoid giving bots feedback
       return NextResponse.json(
         { success: true, message: "Job submitted successfully" },
         { status: 200 }
       );
     }
 
-    // Extract and validate required fields
+    // ✅ Read selected plan from the form
+    const plan = String(form.get("plan") || "basic");
+    const plan_price_eur_raw = String(form.get("plan_price_eur") || "").trim();
+    const plan_price_eur =
+      plan_price_eur_raw && !Number.isNaN(Number(plan_price_eur_raw))
+        ? Number(plan_price_eur_raw)
+        : undefined;
+
     const company = String(form.get("company") || "").trim();
     const contact_name = String(form.get("name") || "").trim();
     const email = String(form.get("email") || "").trim();
@@ -26,7 +32,6 @@ export async function POST(req: Request) {
     const description = String(form.get("description") || "").trim();
     const logoFile = form.get("logo") as File | null;
 
-    // Basic validation
     if (!company || !contact_name || !email || !job_title || !description) {
       return NextResponse.json(
         { error: "Missing required fields. Please fill out all required fields." },
@@ -34,26 +39,18 @@ export async function POST(req: Request) {
       );
     }
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      return NextResponse.json(
-        { error: "Please enter a valid email address." },
-        { status: 400 }
-      );
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      return NextResponse.json({ error: "Please enter a valid email address." }, { status: 400 });
     }
 
-    // Handle logo upload if provided
     let logoUrl: string | undefined;
-    if (logoFile && logoFile instanceof File && logoFile.size > 0 && logoFile.name !== 'undefined') {
+    if (logoFile && logoFile instanceof File && logoFile.size > 0 && logoFile.name !== "undefined") {
       try {
-        // Convert File to Buffer for Supabase upload
         const arrayBuffer = await logoFile.arrayBuffer();
         const buffer = Buffer.from(arrayBuffer);
-        
         logoUrl = await uploadLogo(buffer, logoFile.name, logoFile.type, company);
       } catch (uploadError) {
-        console.error('[LOGO_UPLOAD_ERROR]', uploadError);
+        console.error("[LOGO_UPLOAD_ERROR]", uploadError);
         return NextResponse.json(
           { error: uploadError instanceof Error ? uploadError.message : "Failed to upload logo" },
           { status: 400 }
@@ -61,7 +58,7 @@ export async function POST(req: Request) {
       }
     }
 
-    // Prepare the submission data
+    // ✅ Include plan info in the submission (ensure your table has these columns or JSON meta)
     const submission: EmployerJobSubmission = {
       company,
       contact_name,
@@ -81,12 +78,14 @@ export async function POST(req: Request) {
       description,
       english_friendly: form.get("englishFriendly") === "on",
       external_url: String(form.get("externalUrl") || "").trim() || undefined,
-      logo_url: logoUrl, // Use uploaded logo URL
+      logo_url: logoUrl,
       logo_alt: String(form.get("logoAlt") || "").trim() || undefined,
       status: "pending",
+      // @ts-expect-error — add these fields to EmployerJobSubmission or store them in a JSON column
+      plan,
+      plan_price_eur,
     };
 
-    // Insert into Supabase
     const { data, error } = await supabase
       .from("employer_job_submissions")
       .insert([submission])
@@ -95,39 +94,29 @@ export async function POST(req: Request) {
 
     if (error) {
       console.error("[EMPLOYER_LEAD_ERROR]", error);
-      
-      // Provide more specific error messages
       let errorMessage = "Failed to submit job. Please try again.";
       if (error.message?.includes("unique")) {
-        errorMessage = "This job has already been submitted. Please contact us if you need to make changes.";
+        errorMessage =
+          "This job has already been submitted. Please contact us if you need to make changes.";
       } else if (error.message?.includes("network")) {
         errorMessage = "Network error. Please check your connection and try again.";
       }
-      
-      return NextResponse.json(
-        { error: errorMessage },
-        { status: 500 }
-      );
+      return NextResponse.json({ error: errorMessage }, { status: 500 });
     }
 
-    console.log("[EMPLOYER_LEAD_SUCCESS]", { id: data.id, company, job_title });
+    console.log("[EMPLOYER_LEAD_SUCCESS]", { id: data.id, company, job_title, plan, plan_price_eur });
 
-    // Send email notifications in background (fire and forget)
-    // This runs asynchronously and won't block the response
-    // If emails fail, submission still succeeds
-    sendJobSubmissionNotification({ submission, submissionId: data.id })
-      .catch(error => console.error('[EMAIL_NOTIFICATION_ERROR]', error));
-    
-    sendEmployerConfirmation({ submission, submissionId: data.id })
-      .catch(error => console.error('[EMAIL_CONFIRMATION_ERROR]', error));
+    // Include plan info in notifications
+    sendJobSubmissionNotification({ submission: { ...submission }, submissionId: data.id }).catch(
+      (error) => console.error("[EMAIL_NOTIFICATION_ERROR]", error)
+    );
 
-    // Return success immediately - email status doesn't affect response
+    sendEmployerConfirmation({ submission: { ...submission }, submissionId: data.id }).catch(
+      (error) => console.error("[EMAIL_CONFIRMATION_ERROR]", error)
+    );
+
     return NextResponse.json(
-      { 
-        success: true, 
-        message: "Job submitted successfully",
-        id: data.id 
-      },
+      { success: true, message: "Job submitted successfully", id: data.id },
       { status: 200 }
     );
   } catch (error) {
@@ -138,4 +127,3 @@ export async function POST(req: Request) {
     );
   }
 }
-
