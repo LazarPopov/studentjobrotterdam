@@ -10,6 +10,10 @@ export const metadata: Metadata = {
   title: "Student Jobs Rotterdam",
   description:
     "Find student jobs in Rotterdam — English-friendly roles, fast apply tips, and real pay ranges.",
+  // ✅ Inject AdSense account meta tag
+  other: {
+    "google-adsense-account": "ca-pub-6526366734536758",
+  },
 };
 
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID || "GTM-WT8SB7T6";
@@ -45,59 +49,14 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
 
-        {/* Google AdSense */}
+        {/* (Optional) If you still want to try AdSense JS later, keep it commented:
         <Script
           id="adsense"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6526366734536758"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-
-        {/* Click delegation for simple data-attributes based tracking */}
-        <Script id="gtm-delegation" strategy="afterInteractive">
-          {`
-            (function () {
-              const getExtra = (el) =>
-                Object.fromEntries(
-                  Object.entries(el.dataset)
-                    .filter(([k]) => k.startsWith("gtmProp"))
-                    .map(([k, v]) => [k.replace(/^gtmProp/, "").replace(/[A-Z]/g, m => "_"+m.toLowerCase()).replace(/^_/, ""), v])
-                );
-
-              document.addEventListener("click", function (e) {
-                const target = (e.target as HTMLElement).closest("[data-gtm-event]");
-                if (!target) return;
-
-                const event = (target as HTMLElement).dataset.gtmEvent!;
-                const label = (target as HTMLElement).dataset.gtmLabel;
-                const value = (target as HTMLElement).dataset.gtmValue;
-
-                // Optionally collect values from inputs when specified
-                let collected = {};
-                const collect = (target as HTMLElement).dataset.gtmCollect;
-                if (collect) {
-                  try {
-                    collected = collect.split(",").reduce((acc, pair) => {
-                      const [key, selector] = pair.split(":").map(s => s.trim());
-                      const el = document.querySelector(selector) as HTMLInputElement | HTMLSelectElement | null;
-                      acc[key] = el ? (("value" in el && el.value) || el.textContent || "") : "";
-                      return acc;
-                    }, {} as Record<string, any>);
-                  } catch {}
-                }
-
-                window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({
-                  event,
-                  event_label: label,
-                  event_value: value ? Number(value) : undefined,
-                  ...getExtra(target as HTMLElement),
-                  ...collected,
-                });
-              }, { capture: true });
-            })();
-          `}
-        </Script>
+        */}
       </head>
 
       <body className="min-h-svh bg-white text-slate-900 flex flex-col">
