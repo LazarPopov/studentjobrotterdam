@@ -51,6 +51,7 @@ const PRICING_PLANS = [
     name: "Featured",
     price: "120",
     label: "€120",
+    badge: "Most Purchased",
     perks: [
       "Homepage Featured row (rotates)",
       "Pinned in category",
@@ -84,9 +85,9 @@ export default function EmployerForm() {
   const [logoFile, setLogoFile] = useState<File | null>(null);
   const [logoPreview, setLogoPreview] = useState<string | null>(null);
 
-  // ✅ plan selection (defaults to Basic)
+  // ✅ plan selection (defaults to Featured - most popular)
   const [selectedPlan, setSelectedPlan] =
-    useState<"basic" | "featured" | "premium">("basic");
+    useState<"basic" | "featured" | "premium">("featured");
 
   const validateFile = (file: File): string => {
     if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {
@@ -291,7 +292,7 @@ export default function EmployerForm() {
       setFieldErrors({});
       setLogoFile(null);
       setLogoPreview(null);
-      setSelectedPlan("basic");
+      setSelectedPlan("featured");
     } catch (err) {
       setToast({
         type: "error",
@@ -306,7 +307,11 @@ export default function EmployerForm() {
     <>
       {/* Toast Notification */}
       {toast && (
-        <Toast type={toast.type} message={toast.message} onClose={() => setToast(null)} />
+        <Toast
+          type={toast.type}
+          message={toast.message}
+          onClose={() => setToast(null)}
+        />
       )}
 
       <form ref={formRef} onSubmit={handleSubmit} className="mt-6 grid gap-6">
@@ -315,10 +320,28 @@ export default function EmployerForm() {
           {PRICING_PLANS.map((p) => (
             <label
               key={p.key}
-              className={`relative block rounded-3xl border p-6 md:p-8 cursor-pointer transition ${
-                selectedPlan === p.key ? "ring-2 ring-emerald-500" : ""
+              className={`relative block rounded-3xl border p-6 md:p-8 cursor-pointer transition-all duration-300 hover:shadow-xl hover:-translate-y-1 ${
+                selectedPlan === p.key
+                  ? `ring-2 ${
+                      p.key === "featured"
+                        ? "ring-purple-500"
+                        : "ring-emerald-500"
+                    } shadow-lg`
+                  : ""
+              } ${
+                p.key === "featured"
+                  ? "border-purple-700 border-2 shadow-lg"
+                  : ""
               }`}
             >
+              {p.key === "featured" && (
+                <div className="absolute -top-6 left-1/2 -translate-x-1/2 text-center">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-purple-700 text-white shadow-md">
+                    {p.badge}
+                  </span>
+                </div>
+              )}
+
               <input
                 type="radio"
                 name="plan_radio"
@@ -337,15 +360,40 @@ export default function EmployerForm() {
                   <li key={perk}>• {perk}</li>
                 ))}
               </ul>
-              <div className="mt-4 inline-flex items-center gap-2 text-sm text-emerald-700">
-                Click to select
+              <div className="mt-4">
+                {selectedPlan === p.key ? (
+                  <span className="inline-flex items-center gap-1 text-sm font-semibold text-emerald-700 animate-fade-in">
+                    <svg
+                      className="w-4 h-4 animate-check-pop"
+                      fill="currentColor"
+                      viewBox="0 0 20 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+                    Selected
+                  </span>
+                ) : (
+                  <span className="inline-flex items-center gap-2 text-sm text-slate-500 transition-opacity hover:opacity-70">
+                    Click to select
+                  </span>
+                )}
               </div>
             </label>
           ))}
         </fieldset>
 
         {/* spam honeypot */}
-        <input type="text" name="website" className="hidden" tabIndex={-1} autoComplete="off" />
+        <input
+          type="text"
+          name="website"
+          className="hidden"
+          tabIndex={-1}
+          autoComplete="off"
+        />
 
         <div className="grid md:grid-cols-2 gap-4">
           <div className="grid gap-2">
@@ -382,7 +430,9 @@ export default function EmployerForm() {
               }`}
               placeholder="Full name"
             />
-            {fieldErrors.name && <p className="text-xs text-red-600">{fieldErrors.name}</p>}
+            {fieldErrors.name && (
+              <p className="text-xs text-red-600">{fieldErrors.name}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <label className="text-sm font-medium">
@@ -399,7 +449,9 @@ export default function EmployerForm() {
               }`}
               placeholder="you@company.com"
             />
-            {fieldErrors.email && <p className="text-xs text-red-600">{fieldErrors.email}</p>}
+            {fieldErrors.email && (
+              <p className="text-xs text-red-600">{fieldErrors.email}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <label className="text-sm font-medium">Phone (optional)</label>
@@ -414,7 +466,9 @@ export default function EmployerForm() {
               }`}
               placeholder="+31 ..."
             />
-            {fieldErrors.phone && <p className="text-xs text-red-600">{fieldErrors.phone}</p>}
+            {fieldErrors.phone && (
+              <p className="text-xs text-red-600">{fieldErrors.phone}</p>
+            )}
           </div>
         </div>
 
@@ -434,7 +488,9 @@ export default function EmployerForm() {
               }`}
               placeholder="e.g., Barista (Part-Time)"
             />
-            {fieldErrors.title && <p className="text-xs text-red-600">{fieldErrors.title}</p>}
+            {fieldErrors.title && (
+              <p className="text-xs text-red-600">{fieldErrors.title}</p>
+            )}
           </div>
           <div className="grid gap-2">
             <label className="text-sm font-medium">
@@ -487,7 +543,9 @@ export default function EmployerForm() {
             />
           </div>
           <div className="grid gap-2">
-            <label className="text-sm font-medium">Area / neighborhood (optional)</label>
+            <label className="text-sm font-medium">
+              Area / neighborhood (optional)
+            </label>
             <input
               name="area"
               disabled={isSubmitting}
@@ -515,7 +573,9 @@ export default function EmployerForm() {
               placeholder="e.g., 12.50"
             />
             {fieldErrors.baseSalaryMin && (
-              <p className="text-xs text-red-600">{fieldErrors.baseSalaryMin}</p>
+              <p className="text-xs text-red-600">
+                {fieldErrors.baseSalaryMin}
+              </p>
             )}
           </div>
           <div className="grid gap-2">
@@ -534,11 +594,15 @@ export default function EmployerForm() {
               placeholder="e.g., 15.00"
             />
             {fieldErrors.baseSalaryMax && (
-              <p className="text-xs text-red-600">{fieldErrors.baseSalaryMax}</p>
+              <p className="text-xs text-red-600">
+                {fieldErrors.baseSalaryMax}
+              </p>
             )}
           </div>
           <div className="grid gap-2">
-            <label className="text-sm font-medium">External apply URL (optional)</label>
+            <label className="text-sm font-medium">
+              External apply URL (optional)
+            </label>
             <input
               name="externalUrl"
               type="url"
@@ -559,7 +623,9 @@ export default function EmployerForm() {
           <div className="grid gap-2">
             <label className="text-sm font-medium">
               Company Logo (optional)
-              <span className="text-xs text-slate-500 ml-2">(Max 2MB, JPG/PNG/WebP)</span>
+              <span className="text-xs text-slate-500 ml-2">
+                (Max 2MB, JPG/PNG/WebP)
+              </span>
             </label>
             <div className="flex items-start gap-4">
               <div className="flex-1">
@@ -581,7 +647,9 @@ export default function EmployerForm() {
                   `}
                 />
                 {fieldErrors.logo && (
-                  <p className="mt-1 text-xs text-red-600">{fieldErrors.logo}</p>
+                  <p className="mt-1 text-xs text-red-600">
+                    {fieldErrors.logo}
+                  </p>
                 )}
                 <p className="mt-1 text-xs text-slate-500">
                   Recommended: Square image, at least 200x200px
@@ -589,13 +657,19 @@ export default function EmployerForm() {
               </div>
               {logoPreview && (
                 <div className="relative h-20 w-20 rounded-xl border-2 border-slate-200 overflow-hidden bg-white">
-                  <img src={logoPreview} alt="Logo preview" className="w-full h-full object-contain p-2" />
+                  <img
+                    src={logoPreview}
+                    alt="Logo preview"
+                    className="w-full h-full object-contain p-2"
+                  />
                 </div>
               )}
             </div>
           </div>
           <div className="grid gap-2">
-            <label className="text-sm font-medium">Logo description (for accessibility)</label>
+            <label className="text-sm font-medium">
+              Logo description (for accessibility)
+            </label>
             <input
               name="logoAlt"
               disabled={isSubmitting}
@@ -609,7 +683,9 @@ export default function EmployerForm() {
         <div className="grid gap-2">
           <label className="text-sm font-medium">
             Job description <span className="text-red-500">*</span>
-            <span className="text-xs text-slate-500 ml-2">(min 50 characters)</span>
+            <span className="text-xs text-slate-500 ml-2">
+              (min 50 characters)
+            </span>
           </label>
           <textarea
             name="description"
@@ -659,7 +735,14 @@ export default function EmployerForm() {
                   fill="none"
                   viewBox="0 0 24 24"
                 >
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                  <circle
+                    className="opacity-25"
+                    cx="12"
+                    cy="12"
+                    r="10"
+                    stroke="currentColor"
+                    strokeWidth="4"
+                  ></circle>
                   <path
                     className="opacity-75"
                     fill="currentColor"

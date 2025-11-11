@@ -31,6 +31,10 @@ CREATE TABLE IF NOT EXISTS employer_job_submissions (
   logo_url TEXT,
   logo_alt TEXT,
   
+  -- Pricing Plan
+  plan TEXT DEFAULT 'basic' NOT NULL,
+  plan_price_eur TEXT,
+  
   -- Metadata
   status TEXT DEFAULT 'pending' NOT NULL,
   reviewed_at TIMESTAMPTZ,
@@ -78,7 +82,9 @@ SELECT
   english_friendly,
   external_url,
   logo_url,
-  logo_alt
+  logo_alt,
+  plan,
+  plan_price_eur
 FROM employer_job_submissions
 WHERE status = 'approved'
 ORDER BY created_at DESC;

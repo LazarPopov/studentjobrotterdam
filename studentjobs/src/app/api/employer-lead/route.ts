@@ -19,11 +19,7 @@ export async function POST(req: Request) {
 
     // ✅ Read selected plan from the form
     const plan = String(form.get("plan") || "basic");
-    const plan_price_eur_raw = String(form.get("plan_price_eur") || "").trim();
-    const plan_price_eur =
-      plan_price_eur_raw && !Number.isNaN(Number(plan_price_eur_raw))
-        ? Number(plan_price_eur_raw)
-        : undefined;
+    const plan_price_eur = String(form.get("plan_price_eur") || "").trim() || undefined;
 
     const company = String(form.get("company") || "").trim();
     const contact_name = String(form.get("name") || "").trim();
@@ -58,7 +54,7 @@ export async function POST(req: Request) {
       }
     }
 
-    // ✅ Include plan info in the submission (ensure your table has these columns or JSON meta)
+    // Prepare the submission data including pricing plan
     const submission: EmployerJobSubmission = {
       company,
       contact_name,
@@ -80,10 +76,9 @@ export async function POST(req: Request) {
       external_url: String(form.get("externalUrl") || "").trim() || undefined,
       logo_url: logoUrl,
       logo_alt: String(form.get("logoAlt") || "").trim() || undefined,
-      status: "pending",
-      // @ts-expect-error — add these fields to EmployerJobSubmission or store them in a JSON column
       plan,
       plan_price_eur,
+      status: "pending",
     };
 
     const { data, error } = await supabase

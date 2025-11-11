@@ -30,6 +30,8 @@ export interface EmployerJobSubmission {
   external_url?: string;
   logo_url?: string;
   logo_alt?: string;
+  plan?: string;
+  plan_price_eur?: string;
   status?: string;
   reviewed_at?: string;
   reviewed_by?: string;
