@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   title: "Student Jobs Rotterdam",
   description:
     "Find student jobs in Rotterdam — English-friendly roles, fast apply tips, and real pay ranges.",
-  // ✅ Inject AdSense account meta tag
+  // keeps the account meta for site verification
   other: {
     "google-adsense-account": "ca-pub-6526366734536758",
   },
@@ -49,14 +49,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           `}
         </Script>
 
-        {/* (Optional) If you still want to try AdSense JS later, keep it commented:
+        {/* Google AdSense (async loader) */}
         <Script
           id="adsense"
           src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6526366734536758"
           crossOrigin="anonymous"
           strategy="afterInteractive"
         />
-        */}
       </head>
 
       <body className="min-h-svh bg-white text-slate-900 flex flex-col">
