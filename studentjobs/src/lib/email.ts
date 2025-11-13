@@ -151,6 +151,13 @@ export async function sendJobSubmissionNotification(data: JobSubmissionEmailData
           </div>
           ` : ''}
           
+          <h2 style="margin-top: 30px; color: #0e9c63;">Pricing Plan</h2>
+          
+          <div class="field">
+            <span class="label">Selected Plan</span>
+            <div class="value"><strong>${submission.plan || 'basic'}</strong> ${submission.plan_price_eur ? `- €${submission.plan_price_eur}` : ''}</div>
+          </div>
+          
           <div class="field">
             <span class="label">Job Description</span>
             <div class="value" style="white-space: pre-wrap;">${submission.description}</div>
@@ -218,6 +225,10 @@ Category: ${submission.category}
 Location: ${submission.city}${submission.area ? `, ${submission.area}` : ''}
 ${submission.base_salary_min || submission.base_salary_max ? `Salary: €${submission.base_salary_min || '?'} - €${submission.base_salary_max || '?'}/hour` : ''}
 ${submission.english_friendly ? 'English-friendly: Yes' : ''}
+
+PRICING PLAN
+-----------
+Plan: ${submission.plan || 'basic'}${submission.plan_price_eur ? ` - €${submission.plan_price_eur}` : ''}
 
 DESCRIPTION
 -----------
