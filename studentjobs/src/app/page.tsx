@@ -281,7 +281,7 @@ export default function Page() {
             <select
               id="category"
               name="category"
-              className="w-full min-w-0 border rounded-xl px-4 py-3 bg-white text-slate-900"
+              className="w/full min-w-0 border rounded-xl px-4 py-3 bg-white text-slate-900"
             >
               <option value="">All categories</option>
               {categories.map((c) => (
@@ -405,7 +405,7 @@ export default function Page() {
       <section className="px-6 py-6 md:py-10 bg-gray-50">
         <div className="mx-auto max-w-6xl">
           <h2 className="text-2xl md:text-3xl font-semibold">Latest from the blog</h2>
-          <div className="mt-6 grid gap-4 md:grid-cols-3">
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
             {blogPosts.map((post) => (
               <Link
                 key={post.slug}
@@ -508,6 +508,28 @@ export default function Page() {
               Contact us
             </Link>
             .
+          </div>
+        </div>
+      </section>
+
+      {/* PARTNERS LINK */}
+      <section className="px-6 py-8 bg-gray-50">
+        <div className="mx-auto max-w-6xl">
+          <div className="rounded-2xl border bg-white p-5 flex items-center justify-between">
+            <div>
+              <h2 className="text-lg md:text-xl font-semibold">Our partners</h2>
+              <p className="text-sm text-gray-700 mt-1">
+                We collaborate with SEO, community, and hiring partners in Rotterdam.
+              </p>
+            </div>
+            <Link
+              href="/partners"
+              className="btn btn-primary"
+              data-gtm-event="partners_link_home"
+              data-gtm-label="homepage_footer"
+            >
+              See partners →
+            </Link>
           </div>
         </div>
       </section>
