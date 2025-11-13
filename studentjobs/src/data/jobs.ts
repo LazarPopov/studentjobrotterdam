@@ -121,7 +121,7 @@ descriptionHtml: "<p><strong>Are you tired of endless study sessions and sitting
     orgName: "Pepperminds",
   
     descriptionHtml:
-     "<p><strong>Earn €150 per shift</strong> as part of Pepperminds’ door-to-door team in Rotterdam. We mix the <em>personal touch in a digital era</em> with energy, coaching, and paid training so you can grow fast and earn even faster.</p><ul><li><strong>Flexible schedule</strong> — Dutch is not required, and you can even receive DUO… if you work enough hours of course 😉</li><li><strong>The better you are, the more you earn!</strong> You start as a rookie, grow into a promoter, and can become a captain — with performance bonuses reaching up to <strong>€500 a day!</strong></li><li><strong>Learn real sales</strong> — your colleagues are students from all kinds of backgrounds, and together you’ll master the most versatile skill out there: sales!</li><li><strong>Challenge yourself</strong> — every day is different, full of teamwork, laughter, and growth.</li><li><strong>After work culture</strong> — we even have our own bar where the team celebrates wins and unwinds together!</li></ul><p>Ready to test your limits, make friends, and earn like a pro? <strong>Join the crew and start this week!</strong></p>",    baseSalaryMin: 12,
+     "<p><strong>Earn €150 per shift</strong> as part of Pepperminds’ door-to-door team in Rotterdam. We mix the <em>personal touch in a digital era</em> with energy, coaching, and paid training so you can grow fast and earn even faster.</p><ul><li><strong> Dutch is required</strong>, and you can even receive DUO… if you work enough hours of course 😉</li><li><strong>The better you are, the more you earn!</strong> You start as a rookie, grow into a promoter, and can become a captain — with performance bonuses reaching up to <strong>€500 a day!</strong></li><li><strong>Learn real sales</strong> — your colleagues are students from all kinds of backgrounds, and together you’ll master the most versatile skill out there: sales!</li><li><strong>Challenge yourself</strong> — every day is different, full of teamwork, laughter, and growth.</li><li><strong>After work culture</strong> — we even have our own bar where the team celebrates wins and unwinds together!</li></ul><p>Ready to test your limits, make friends, and earn like a pro? <strong>Join the crew and start this week!</strong></p>",    baseSalaryMin: 12,
     employmentType: "PART_TIME",
     baseSalaryMax: 20,
     DUO: true,
@@ -129,7 +129,7 @@ descriptionHtml: "<p><strong>Are you tired of endless study sessions and sitting
     payUnit: "HOUR",
     addressLocality: "Rotterdam",
     area: "Various districts",
-    englishFriendly: true,
+    englishFriendly: false,
     workHours: "10–20 h/week",
     datePosted: new Date().toISOString().slice(0, 10),
     validThrough: "2025-12-31",
@@ -427,23 +427,23 @@ const NEW_JOBS: RawJob[] = [
     externalUrl:
       "https://www.studentjob.nl/vacatures/3626861-callcenter-medewerkers-gezocht-met-een-uurloon-van-15-excl-bonussen-ongeacht-jouw-leeftijd-fulltime-maar-ook-als-bijbaan-in-rotterdam",
   },
-  {
-    slug: "coolblue-klantenservice-rotterdam",
-    title: "Coolblue Klantenservice – Rotterdam",
-    orgName: "Coolblue",
-    descriptionHtml:
-      "<p>Phone/chat support for orders & deliveries; training included.</p>",
-    employmentType: "PART_TIME",
-    baseSalaryMin: 14.45,
-    currency: "EUR",
-    payUnit: "HOUR",
-    addressLocality: "Rotterdam",
-    workHours: "24–40 h (varies)",
-    datePosted: new Date().toISOString().slice(0, 10),
-    validThrough: "2025-12-31",
-    categories: ["sales"],
-    externalUrl: "https://www.coolblue.nl/vacatures/klantenservice-medewerker",
-  },
+  // {
+  //   slug: "coolblue-klantenservice-rotterdam",
+  //   title: "Coolblue Klantenservice – Rotterdam",
+  //   orgName: "Coolblue",
+  //   descriptionHtml:
+  //     "<p>Phone/chat support for orders & deliveries; training included.</p>",
+  //   employmentType: "PART_TIME",
+  //   baseSalaryMin: 14.45,
+  //   currency: "EUR",
+  //   payUnit: "HOUR",
+  //   addressLocality: "Rotterdam",
+  //   workHours: "24–40 h (varies)",
+  //   datePosted: new Date().toISOString().slice(0, 10),
+  //   validThrough: "2025-12-31",
+  //   categories: ["sales"],
+  //   externalUrl: "https://www.coolblue.nl/vacatures/klantenservice-medewerker",
+  // },
   {
     slug: "enqueteur-rotterdam-jobbird",
     title: "Enquêteur (Rotterdam) – Jobbird",
