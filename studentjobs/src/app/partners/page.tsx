@@ -55,13 +55,13 @@ const PARTNERS: Partner[] = [
       `Nationwide student network organizing events, internships, and community initiatives across Dutch cities. Partnering for culture, careers, and <a href="https://bulgariansociety.nl" target="_blank" rel="noopener noreferrer">Bulgarian student life in the Netherlands</a>.`,
     logoUrl: "/logos/bgsnl.png",
   },
-  {
-    name: "Acady",
-    url: "https://acady.nl",
-    descriptionHtml:
-      `Expert IB tutoring (MYP & DP) delivered by experienced graduates and educators—online or at home. Personalized support to boost confidence and grades. Learn more about <a href="https://acady.nl" target="_blank" rel="noopener noreferrer">IB tutoring in the Netherlands</a>.`,
-    logoUrl: "/logos/acady.png",
-  },
+//   {
+//     name: "Acady",
+//     url: "https://acady.nl",
+//     descriptionHtml:
+//       `Expert IB tutoring (MYP & DP) delivered by experienced graduates and educators—online or at home. Personalized support to boost confidence and grades. Learn more about <a href="https://acady.nl" target="_blank" rel="noopener noreferrer">IB tutoring in the Netherlands</a>.`,
+//     logoUrl: "/logos/acady.png",
+//   },
 ];
 
 export default function PartnersPage() {
