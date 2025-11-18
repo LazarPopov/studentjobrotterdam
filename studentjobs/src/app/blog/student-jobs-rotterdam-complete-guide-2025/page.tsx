@@ -67,8 +67,8 @@ export default function GuideComplete() {
 
           <div className="mt-5 overflow-hidden rounded-2xl border bg-white">
             <Image
-              src="/blog/international-students-looking-for-English-speaking-jobs-near-Rotterdams-Erasmus-Bridge.png"
-              alt="International students looking for English-speaking jobs near Rotterdam's Erasmus Bridge"
+              src="/blog/rotterdam-bike.png"
+              alt="rotterdam-bike"
               width={1280}
               height={720}
               priority
