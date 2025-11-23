@@ -253,10 +253,13 @@ export default function EmployerForm() {
         if (typeof price === "number") {
           formData.append("plan_price_eur", String(price));
         } else {
-          // Keep placeholder X/Y if you haven’t set numbers yet
+          // Keep placeholder X/Y if you haven't set numbers yet
           formData.append("plan_price_eur", String(price));
         }
       }
+
+      // ✅ Include hardcoded region
+      formData.append("region", "rotterdam");
 
       // Add logo file if present
       if (logoFile) {
