@@ -190,7 +190,7 @@ externalUrl: "https://www.uber.com/signup/drive/deliver/?invite_code=a6cpc37",
     // logo
     logoUrl: "/logos/domakin.png",
     logoAlt: "Domakin logo",
-    externalUrl: "https://www.domakin.nl/contact"
+    externalUrl: "https://www.domakin.nl/careers"
   },
   {
     slug: "domakin-room-finder-rotterdam",
