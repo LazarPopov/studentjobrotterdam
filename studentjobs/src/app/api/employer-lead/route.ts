@@ -65,6 +65,7 @@ export async function POST(req: Request) {
       category: String(form.get("category") || "hospitality"),
       city: String(form.get("city") || "Rotterdam"),
       area: String(form.get("area") || "").trim() || undefined,
+      region: String(form.get("region") || "rotterdam"),
       base_salary_min: form.get("baseSalaryMin")
         ? parseFloat(String(form.get("baseSalaryMin")))
         : undefined,

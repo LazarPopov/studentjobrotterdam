@@ -4,12 +4,14 @@
 CREATE TABLE IF NOT EXISTS employer_job_submissions (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
   created_at TIMESTAMPTZ DEFAULT NOW() NOT NULL,
-  
+
+  -- Region
+  region TEXT DEFAULT 'rotterdam' NOT NULL,
   -- Company & Contact Info
   company TEXT NOT NULL,
   contact_name TEXT NOT NULL,
   email TEXT NOT NULL,
-  phone TEXT,
+  phone TEXT,x
   
   -- Job Details
   job_title TEXT NOT NULL,
@@ -70,6 +72,7 @@ CREATE OR REPLACE VIEW approved_jobs AS
 SELECT 
   id,
   created_at,
+  region,
   company,
   job_title,
   employment_type,
