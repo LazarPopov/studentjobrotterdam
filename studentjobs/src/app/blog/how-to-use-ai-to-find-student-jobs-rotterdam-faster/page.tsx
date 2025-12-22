@@ -69,7 +69,7 @@ export default function AiStudentJobsRotterdamGuide() {
 
           <div className="mt-5 overflow-hidden rounded-2xl border bg-white">
             <Image
-              src="/blog/rotterdam-bridge-photo.png"
+              src="/blog/rotterdam-bridge-photo.jpg"
               alt="Rotterdam Erasmus Bridge and skyline"
               width={1280}
               height={720}

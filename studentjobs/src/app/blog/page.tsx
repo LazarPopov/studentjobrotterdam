@@ -1,4 +1,3 @@
-// ✅ 3) BLOG INDEX listing all posts (no MDX required)
 // src/app/blog/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -6,7 +5,8 @@ import Link from "next/link";
 const POSTS = [
   {
     slug: "studenten-bijbaan-rotterdam",
-    title: "Studenten bijbaan Rotterdam (2025) – Goed betaald, Engelstalig & weekend",
+    title:
+      "Studenten bijbaan Rotterdam (2025) – Goed betaald, Engelstalig & weekend",
     description:
       "De ultieme gids voor een studenten bijbaan in Rotterdam: avond/weekend, Engelstalig, zonder ervaring. Uurloon-tabellen, contractvormen, wijken en snelle filters.",
   },
@@ -28,8 +28,14 @@ const POSTS = [
     description:
       "Shift bonuses, industries, and certifications that increase pay.",
   },
+  {
+    slug: "how-to-use-ai-to-find-student-jobs-rotterdam-faster",
+    title:
+      "How to Use AI to Find Student Jobs in Rotterdam Faster (Without Wasting Time)",
+    description:
+      "Copy paste AI prompts, a 7-day workflow, screening checklist, and application templates to get replies faster.",
+  },
 ];
-
 
 export const metadata: Metadata = {
   title: "Blog | Student Jobs Rotterdam",
@@ -63,4 +69,3 @@ export default function BlogIndex() {
     </section>
   );
 }
-  
