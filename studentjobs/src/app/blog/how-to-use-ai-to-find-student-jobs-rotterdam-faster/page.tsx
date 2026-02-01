@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-const PUBLISH_DATE = "2025-12-22";
-const MODIFIED_DATE = "2025-12-22";
+const PUBLISH_DATE = "2026-12-22";
+const MODIFIED_DATE = "2026-12-22";
 const CANONICAL =
   "https://studentjobsrotterdam.nl/blog/how-to-use-ai-to-find-student-jobs-rotterdam-faster";
 const OG_IMAGE =

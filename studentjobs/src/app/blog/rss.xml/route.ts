@@ -2,9 +2,9 @@
 import { NextResponse } from "next/server";
 const site = "https://studentjobsrotterdam.nl";
 const posts = [
-  { slug: "english-speaking-student-jobs-rotterdam", title: "English-Speaking Student Jobs in Rotterdam (2025)" },
-  { slug: "student-jobs-rotterdam-complete-guide-2025", title: "Student Jobs in Rotterdam — Complete Guide (2025)" },
-  { slug: "best-paying-student-jobs-rotterdam-2025", title: "Best-Paying Student Jobs in Rotterdam (2025)" },
+  { slug: "english-speaking-student-jobs-rotterdam", title: "English-Speaking Student Jobs in Rotterdam (2026)" },
+  { slug: "student-jobs-rotterdam-complete-guide-2026", title: "Student Jobs in Rotterdam — Complete Guide (2026)" },
+  { slug: "best-paying-student-jobs-rotterdam-2026", title: "Best-Paying Student Jobs in Rotterdam (2026)" },
 ];
 export async function GET() {
   const items = posts.map(p => `

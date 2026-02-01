@@ -39,8 +39,8 @@ export default function sitemap() {
 
   const blog = [
     "english-speaking-student-jobs-rotterdam",
-    "student-jobs-rotterdam-complete-guide-2025",
-    "best-paying-student-jobs-rotterdam-2025",
+    "student-jobs-rotterdam-complete-guide-2026",
+    "best-paying-student-jobs-rotterdam-2026",
   ].map((slug) => ({
     url: `${base}/blog/${slug}`,
     changefreq: "monthly",

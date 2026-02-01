@@ -3,7 +3,7 @@ export default {
     return [
       {
         source: "/blog/best-paying-student-jobs-rotterdam",
-        destination: "/blog/best-paying-student-jobs-rotterdam-2025",
+        destination: "/blog/best-paying-student-jobs-rotterdam-2026",
         permanent: true, // 308
       },
     ];

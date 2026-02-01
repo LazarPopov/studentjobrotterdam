@@ -1,18 +1,18 @@
-// src/app/guides/student-jobs-rotterdam-complete-guide-2025/page.tsx
+// src/app/guides/student-jobs-rotterdam-complete-guide-2026/page.tsx
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
-const PUBLISH_DATE = "2025-10-02";
-const MODIFIED_DATE = "2025-10-02";
+const PUBLISH_DATE = "2026-01-02";
+const MODIFIED_DATE = "2026-01-02";
 const CANONICAL =
-  "https://studentjobsrotterdam.nl/blog/student-jobs-rotterdam-complete-guide-2025";
+  "https://studentjobsrotterdam.nl/blog/student-jobs-rotterdam-complete-guide-2026";
 const OG_IMAGE =
   "https://studentjobsrotterdam.nl/blog/international-students-looking-for-English-speaking-jobs-near-Rotterdams-Erasmus-Bridge.jpg"; // place /public/guides/placeholder.jpg
 
 export const metadata: Metadata = {
   title:
-    "Student Jobs in Rotterdam — Complete Guide (2025): Visas, Contracts, Wages, Neighborhoods",
+    "Student Jobs in Rotterdam — Complete Guide (2026): Visas, Contracts, Wages, Neighborhoods",
   description:
     "A complete, practical guide for student jobs in Rotterdam: permits, contracts, pay, neighborhoods, CV templates, and where to find English-speaking roles fast.",
   keywords: [
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   alternates: { canonical: CANONICAL },
   openGraph: {
     title:
-      "Student Jobs in Rotterdam — Complete Guide (2025): Visas, Contracts, Wages, Neighborhoods",
+      "Student Jobs in Rotterdam — Complete Guide (2026): Visas, Contracts, Wages, Neighborhoods",
     description:
       "Permits, contracts, pay ranges, neighborhoods, and step-by-step tactics to land a student job in Rotterdam.",
     url: CANONICAL,
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Student Jobs in Rotterdam — Complete Guide (2025): Visas, Contracts, Wages, Neighborhoods",
+      "Student Jobs in Rotterdam — Complete Guide (2026): Visas, Contracts, Wages, Neighborhoods",
     description:
       "Everything you need to start working in Rotterdam as a student — fast and legally.",
     images: [OG_IMAGE],
@@ -54,7 +54,7 @@ export default function GuideComplete() {
         {/* HEADER */}
         <header className="max-w-3xl">
           <h1 className="text-3xl md:text-5xl font-semibold leading-tight">
-            Student Jobs in Rotterdam — Complete Guide (2025)
+            Student Jobs in Rotterdam — Complete Guide (2026)
           </h1>
           <p className="mt-3 text-sm text-slate-600">
             By <span className="font-medium">Student Jobs Rotterdam</span> • Updated{" "}
@@ -237,7 +237,7 @@ export default function GuideComplete() {
               "@context": "https://schema.org",
               "@type": "Article",
               headline:
-                "Student Jobs in Rotterdam — Complete Guide (2025): Visas, Contracts, Wages, Neighborhoods",
+                "Student Jobs in Rotterdam — Complete Guide (2026): Visas, Contracts, Wages, Neighborhoods",
               description:
                 "Permits, contracts, pay ranges, neighborhoods, and step-by-step tactics to land a student job in Rotterdam.",
               image: OG_IMAGE,
@@ -261,7 +261,7 @@ export default function GuideComplete() {
               "@type": "BreadcrumbList",
               itemListElement: [
                 { "@type": "ListItem", position: 1, name: "Blog", item: "https://studentjobsrotterdam.nl/blog" },
-                { "@type": "ListItem", position: 2, name: "Student Jobs in Rotterdam — Complete Guide (2025)", item: CANONICAL },
+                { "@type": "ListItem", position: 2, name: "Student Jobs in Rotterdam — Complete Guide (2026)", item: CANONICAL },
               ],
             }),
           }}
