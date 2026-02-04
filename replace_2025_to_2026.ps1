@@ -1,4 +1,4 @@
-# replace_2025_to_2026.ps1
+# replace_2026_to_2026.ps1
 param(
     [string]$Root = (Get-Location).Path
 )
@@ -45,9 +45,9 @@ Get-ChildItem -LiteralPath $Root -Recurse -File -Force | ForEach-Object {
     if (-not (Test-IsLikelyTextFile $_.FullName)) { return }
 
     $text = Get-Content -LiteralPath $_.FullName -Raw
-    if ($text -notmatch "2025") { return }
+    if ($text -notmatch "2026") { return }
 
-    $newText = $text -replace "2025","2026"
+    $newText = $text -replace "2026","2026"
     if ($newText -ne $text) {
         Set-Content -LiteralPath $_.FullName -Value $newText -NoNewline
         $changedFiles++
@@ -57,11 +57,11 @@ Get-ChildItem -LiteralPath $Root -Recurse -File -Force | ForEach-Object {
 
 # 2) Rename files (deepest first)
 Get-ChildItem -LiteralPath $Root -Recurse -File -Force |
-Where-Object { -not (Should-SkipPath $_.FullName) -and $_.Name -like "*2025*" } |
+Where-Object { -not (Should-SkipPath $_.FullName) -and $_.Name -like "*2026*" } |
 Sort-Object -Property FullName -Descending |
 ForEach-Object {
     $item   = $_
-    $newName = $item.Name -replace "2025","2026"
+    $newName = $item.Name -replace "2026","2026"
     $parent  = Split-Path -LiteralPath $item.FullName -Parent
     $target  = Join-Path -Path $parent -ChildPath $newName
 
@@ -78,11 +78,11 @@ ForEach-Object {
 
 # 3) Rename folders (deepest first)
 Get-ChildItem -LiteralPath $Root -Recurse -Directory -Force |
-Where-Object { -not (Should-SkipPath $_.FullName) -and $_.Name -like "*2025*" } |
+Where-Object { -not (Should-SkipPath $_.FullName) -and $_.Name -like "*2026*" } |
 Sort-Object -Property FullName -Descending |
 ForEach-Object {
     $item   = $_
-    $newName = $item.Name -replace "2025","2026"
+    $newName = $item.Name -replace "2026","2026"
     $parent  = Split-Path -LiteralPath $item.FullName -Parent
     $target  = Join-Path -Path $parent -ChildPath $newName
 
