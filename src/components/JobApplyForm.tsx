@@ -8,7 +8,7 @@ type JobApplyFormProps = {
   jobSlug: string;
   jobTitle?: string;
   orgName?: string;
-  city: string; // hidden, only sent
+  city: string; // not shown, only sent
   redirectTo?: string;
 };
 
@@ -45,26 +45,37 @@ export default function JobApplyForm({
       return;
     }
 
+    if (!phone.trim()) {
+      setErr("Please enter your phone number.");
+      return;
+    }
+
     setLoading(true);
     try {
       const form = new FormData();
       form.append("jobSlug", jobSlug);
       if (jobTitle) form.append("jobTitle", jobTitle);
       if (orgName) form.append("orgName", orgName);
-      form.append("city", (city || "amsterdam").toLowerCase());
+      form.append("city", (city || "rotterdamdam").toLowerCase());
 
       form.append("firstName", firstName);
       form.append("familyName", familyName);
       form.append("email", email);
-      if (phone) form.append("phone", phone);
+      form.append("phone", phone.trim());
       if (message) form.append("message", message);
 
       form.append("consentThisAd", String(consentThisAd));
       form.append("consentSimilarAds", String(consentSimilarAds));
 
-      if (cvFile) form.append("cv", cvFile, cvFile.name);
+      if (cvFile) {
+        form.append("cv", cvFile, cvFile.name);
+      }
 
-      const res = await fetch("/api/job-apply", { method: "POST", body: form });
+      const res = await fetch("/api/job-apply", {
+        method: "POST",
+        body: form,
+      });
+
       const data = (await res.json().catch(() => null)) as any;
 
       if (!res.ok) {
@@ -72,7 +83,7 @@ export default function JobApplyForm({
         return;
       }
 
-      setOk("Application received.");
+      setOk("Application received. We will contact you soon.");
       setFirstName("");
       setFamilyName("");
       setEmail("");
@@ -98,7 +109,6 @@ export default function JobApplyForm({
       </p>
 
       <form onSubmit={onSubmit} className="mt-4 grid gap-3 max-w-full">
-        {/* On mobile: 1 column. On md+: 2 columns. Also prevent overflow */}
         <div className="grid gap-3 grid-cols-1 md:grid-cols-2 min-w-0">
           <label className="grid gap-1 min-w-0">
             <span className="text-sm font-medium">First name</span>
@@ -141,10 +151,11 @@ export default function JobApplyForm({
           </label>
 
           <label className="grid gap-1 min-w-0">
-            <span className="text-sm font-medium">Phone (optional)</span>
+            <span className="text-sm font-medium">Phone</span>
             <input
               value={phone}
               onChange={(e) => setPhone(e.target.value)}
+              required
               className="w-full min-w-0 rounded-xl border border-slate-300 px-3 py-2 focus:outline-none focus:ring-2 focus:ring-slate-900"
               placeholder="+31 6..."
               autoComplete="tel"
