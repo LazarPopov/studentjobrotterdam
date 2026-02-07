@@ -184,7 +184,7 @@ const RAW_JOBS: RawJob[] = [
   categories: ["tutoring"],
   featured: true,
   perSaleAmountText: "High hourly pay depending on subject and experience",
-  logoUrl: "/logos/AcademiaAI.png",
+  logoUrl: "/logos/academiaAI.png",
   logoAlt: "AcademiaAI logo",
 },
   {
