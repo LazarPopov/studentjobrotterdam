@@ -15,7 +15,7 @@ const posts = [
       "Where to find roles that don’t require Dutch, plus quick apply tips for international students.",
     // Optional but recommended: keep dates for better feed freshness signals
     // published: "2026-01-02",
-    // modified: "2026-10-02",
+    // modified: "2026-01-02",
   },
   {
     slug: "student-jobs-rotterdam-complete-guide-2026",
