@@ -30,6 +30,30 @@ export function generateStaticParams() {
   return Object.keys(CATEGORY_LABELS).map((key) => ({ category: key }));
 }
 
+// NEW: ItemList JSON-LD so Google understands this is a jobs list page
+function JobsItemListJsonLd({ items }: { items: { slug: string; title: string }[] }) {
+  const baseUrl = "https://studentjobsrotterdam.nl";
+  const elementList = items.map((j, i) => ({
+    "@type": "ListItem",
+    position: i + 1,
+    name: j.title,
+    url: `${baseUrl}/jobs/${j.slug}`,
+  }));
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: elementList,
+  };
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
+}
+
 function RowLink({
   job,
   className,
@@ -58,8 +82,14 @@ export default function CategoryPage({ params }: { params: { category: string } 
   return (
     <section className="px-6 py-10">
       <div className="mx-auto max-w-5xl">
+        {/* NEW: JSON-LD for this category listing page (does not affect UI) */}
+        <JobsItemListJsonLd items={jobs.map((j) => ({ slug: j.slug, title: j.title }))} />
+
         <nav className="text-sm text-slate-600">
-          <Link className="underline" href="/">Home</Link> / <span>Categories</span> / <span>{label}</span>
+          <Link className="underline" href="/">
+            Home
+          </Link>{" "}
+          / <span>Categories</span> / <span>{label}</span>
         </nav>
 
         <h1 className="mt-3 text-3xl md:text-4xl font-semibold">{label} Jobs in Rotterdam</h1>

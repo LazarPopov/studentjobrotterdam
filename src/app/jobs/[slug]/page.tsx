@@ -4,9 +4,119 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import JobApplyForm from "@/components/JobApplyForm";
 import { getJobBySlug, listJobs } from "@/data/jobs";
+import type { Metadata } from "next";
+
+const BASE_URL = "https://studentjobsrotterdam.nl";
+
+function paySnippet(job: any) {
+  if (!job?.baseSalaryMin) return "";
+  const min = job.baseSalaryMin;
+  const max = job.baseSalaryMax;
+  const unit = job.payUnit ? String(job.payUnit).toLowerCase() : "hour";
+  return max ? `€${min}–€${max}/${unit}` : `€${min}/${unit}`;
+}
+
+export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
+  const job = getJobBySlug(params.slug);
+  if (!job) return { title: "Job not found" };
+
+  const city = (job.addressLocality ? String(job.addressLocality) : "Rotterdam").trim();
+  const title = `${job.title} at ${job.orgName} in ${city}`;
+  const pay = paySnippet(job);
+  const english = job.englishFriendly ? "English friendly" : "Dutch required";
+
+  const description =
+    `${job.title} at ${job.orgName} in ${city}. ` +
+    (pay ? `Pay: ${pay}. ` : "") +
+    `${english}. Apply online.`;
+
+  const canonical = `/jobs/${job.slug}`;
+
+  const ogImage = job.logoUrl
+    ? job.logoUrl.startsWith("http")
+      ? job.logoUrl
+      : `${BASE_URL}${job.logoUrl}`
+    : `${BASE_URL}/og.jpg`;
+
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: {
+      title,
+      description,
+      url: `${BASE_URL}${canonical}`,
+      images: [{ url: ogImage }],
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [ogImage],
+    },
+  };
+}
+
 
 export async function generateStaticParams() {
   return listJobs().map((j) => ({ slug: j.slug }));
+}
+function JobPostingJsonLd({ job, baseUrl }: { job: any; baseUrl: string }) {
+  const city = (job.addressLocality ? String(job.addressLocality) : "Rotterdam").trim();
+
+  const jsonLd: any = {
+    "@context": "https://schema.org",
+    "@type": "JobPosting",
+    title: job.title,
+    description: job.descriptionHtml || "",
+    datePosted: job.datePosted || new Date().toISOString().slice(0, 10),
+    validThrough: job.validThrough || undefined,
+    employmentType: job.employmentType || "PART_TIME",
+    hiringOrganization: {
+      "@type": "Organization",
+      name: job.orgName,
+      logo: job.logoUrl ? (job.logoUrl.startsWith("http") ? job.logoUrl : `${baseUrl}${job.logoUrl}`) : undefined,
+    },
+    jobLocation: {
+      "@type": "Place",
+      address: {
+        "@type": "PostalAddress",
+        addressLocality: city,
+        addressCountry: "NL",
+      },
+    },
+    applicantLocationRequirements: {
+      "@type": "Country",
+      name: "Netherlands",
+    },
+    directApply: true,
+  };
+
+  if (job.baseSalaryMin) {
+    jsonLd.baseSalary = {
+      "@type": "MonetaryAmount",
+      currency: job.currency || "EUR",
+      value: {
+        "@type": "QuantitativeValue",
+        minValue: job.baseSalaryMin,
+        maxValue: job.baseSalaryMax || undefined,
+        unitText: job.payUnit || "HOUR",
+      },
+    };
+  }
+
+  if (job.externalUrl) {
+    jsonLd.applicationContact = undefined;
+    jsonLd.hiringOrganization = { ...jsonLd.hiringOrganization, sameAs: job.externalUrl };
+  }
+
+  return (
+    <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+    />
+  );
 }
 
 export default function JobPage({ params }: { params: { slug: string } }) {
@@ -61,9 +171,6 @@ export default function JobPage({ params }: { params: { slug: string } }) {
                   {job.englishFriendly ? "English-friendly" : "Dutch required"}
                 </div>
 
-                <div className="mt-2 text-sm text-slate-600">
-                  City: <span className="font-mono">{cityPrefill}</span>
-                </div>
               </div>
             </div>
 
