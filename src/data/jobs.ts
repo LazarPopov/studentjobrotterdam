@@ -152,9 +152,9 @@ const RAW_JOBS: RawJob[] = [
   orgName: "AcademiaAI",
 
   descriptionHtml:
-    "<p><strong>Earn well per hour</strong> while working flexibly as an IB tutor with Academia. You can start with as little as <strong>1 hour per week</strong>, or scale up and earn a substantial monthly income.</p>" +
+    "<p><strong>Earn well per hour</strong> while working flexibly as an IB tutor with AcademiaAI. You can start with as little as <strong>1 hour per week</strong>, or scale up and earn a substantial monthly income.</p>" +
     "<br>"+
-    "<p>At Academia, you tutor only within your <strong>area of expertise</strong>. For example, an IB graduate who scored a 6 or 7 in Math AA HL and is studying or has completed a related university degree can tutor DP Math, but not DP Biology. This ensures <strong>high-quality lessons</strong>, which our students truly value.</p>" +
+    "<p>At AcademiaAI, you tutor only within your <strong>area of expertise</strong>. For example, an IB graduate who scored a 6 or 7 in Math AA HL and is studying or has completed a related university degree can tutor DP Math, but not DP Biology. This ensures <strong>high-quality lessons</strong>, which our students truly value.</p>" +
     "<br>"+
     "<p>We hire IB graduate tutors throughout the year. Once accepted, you can start tutoring quickly.</p>" +  
     "<br>"+
@@ -165,7 +165,7 @@ const RAW_JOBS: RawJob[] = [
     "<p><strong>Have you graduated from the International Baccalaureate Diploma Programme (IB DP)?</strong></p>" +
     "<p><strong>Current and completed university studies</strong></p>" +
     "<br>"+
-    "<p>Interested? Apply now and start tutoring with Academia!</p>",
+    "<p>Interested? Apply now and start tutoring with AcademiaAI!</p>",
 
 
 
@@ -218,7 +218,7 @@ descriptionHtml: "<p><strong>Are you tired of endless study sessions and sitting
     orgName: "Pepperminds",
   
     descriptionHtml:
-     "<p><strong>Earn €150 per shift</strong> as part of Pepperminds’ door-to-door team in Rotterdam. We mix the <em>personal touch in a digital era</em> with energy, coaching, and paid training so you can grow fast and earn even faster.</p><ul><li><strong> Dutch is not required</strong>, and you can even receive DUO… if you work enough hours of course 😉</li><li><strong>The better you are, the more you earn!</strong> You start as a rookie, grow into a promoter, and can become a captain — with performance bonuses reaching up to <strong>€500 a day!</strong></li><li><strong>Learn real sales</strong> — your colleagues are students from all kinds of backgrounds, and together you’ll master the most versatile skill out there: sales!</li><li><strong>Challenge yourself</strong> — every day is different, full of teamwork, laughter, and growth.</li><li><strong>After work culture</strong> — we even have our own bar where the team celebrates wins and unwinds together!</li></ul><p>Ready to test your limits, make friends, and earn like a pro? <strong>Join the crew and start this week!</strong></p>",    baseSalaryMin: 12,
+     "<p><strong>C1 DUTCH REQUIRED! Earn €150 per shift</strong> as part of Pepperminds’ door-to-door team in Rotterdam. We mix the <em>personal touch in a digital era</em> with energy, coaching, and paid training so you can grow fast and earn even faster.</p><ul><li><strong> Dutch is not required</strong>, and you can even receive DUO… if you work enough hours of course 😉</li><li><strong>The better you are, the more you earn!</strong> You start as a rookie, grow into a promoter, and can become a captain — with performance bonuses reaching up to <strong>€500 a day!</strong></li><li><strong>Learn real sales</strong> — your colleagues are students from all kinds of backgrounds, and together you’ll master the most versatile skill out there: sales!</li><li><strong>Challenge yourself</strong> — every day is different, full of teamwork, laughter, and growth.</li><li><strong>After work culture</strong> — we even have our own bar where the team celebrates wins and unwinds together!</li></ul><p>Ready to test your limits, make friends, and earn like a pro? <strong>Join the crew and start this week!</strong></p>",    baseSalaryMin: 12,
     employmentType: "PART_TIME",
     baseSalaryMax: 20,
     DUO: true,
@@ -226,7 +226,7 @@ descriptionHtml: "<p><strong>Are you tired of endless study sessions and sitting
     payUnit: "HOUR",
     addressLocality: "Rotterdam",
     area: "Various districts",
-    englishFriendly: true,
+    englishFriendly: false,
     workHours: "10–20 h/week",
     datePosted: new Date().toISOString().slice(0, 10),
     validThrough: "2026-12-31",
@@ -261,7 +261,7 @@ featured: false,
 perSaleAmountText: "€750 sign-up reward after 50 trips (within 90 days; terms apply)",
 logoUrl: "/logos/uber.png",
 logoAlt: "Uber logo",
-externalUrl: "https://www.uber.com/signup/drive/deliver/?invite_code=a6cpc37",
+// externalUrl: "https://www.uber.com/signup/drive/deliver/?invite_code=a6cpc37",
 },
 
 ];
