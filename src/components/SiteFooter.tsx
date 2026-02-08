@@ -137,7 +137,7 @@ export default function SiteFooter() {
         </li>
 
         <li>
-          <a
+          <a  
             href="https://www.studentjobsenchede.nl/"
             className="underline underline-offset-2"
             rel="noopener"
