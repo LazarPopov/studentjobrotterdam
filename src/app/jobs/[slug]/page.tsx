@@ -5,6 +5,7 @@ import { notFound } from "next/navigation";
 import JobApplyForm from "@/components/JobApplyForm";
 import { getJobBySlug, listJobs } from "@/data/jobs";
 import type { Metadata } from "next";
+import PromoAd from "@/components/PromoAd";
 
 const BASE_URL = "https://studentjobsrotterdam.nl";
 
@@ -193,7 +194,7 @@ export default function JobPage({ params }: { params: { slug: string } }) {
     </p>
     </div>
    ) : null}
-
+    <PromoAd placement="apply_page" />
    <JobApplyForm
    jobSlug={job.slug}
    jobTitle={job.title}
