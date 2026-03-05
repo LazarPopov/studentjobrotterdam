@@ -40,6 +40,11 @@ const POSTS = [
     description:
       "Copy-paste prompts, a 7-day workflow, screening checklist, and application templates to get replies faster.",
   },
+    {
+    slug: "netherlands-news-in-english",
+    title: "Best English news platforms in the Netherlands (2026)",
+    description: "Dutch Brief explained, plus DutchNews.nl, NL Times, IamExpat, Expatica, DutchReview, and The Holland Times, with a local angle for internationals.",
+    },
 ];
 
 export const metadata: Metadata = {
