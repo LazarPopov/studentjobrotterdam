@@ -147,6 +147,46 @@ const RAW_JOBS: RawJob[] = [
  // externalUrl: "https://www.domakin.nl/careers",
 },
 {
+  slug: "startdock-community-operations-internship",
+  title: "Community & Operations Internship",
+  orgName: "StartDock Rotterdam",
+
+  descriptionHtml:
+    "<p><strong>Build real experience</strong> while working in a vibrant entrepreneurial community at StartDock Rotterdam. As an intern, you support daily operations, member experience, and community activities in a dynamic coworking environment.</p>" +
+    "<br>" +
+    "<p>At StartDock Rotterdam, you work closely with a team that values <strong>initiative, ownership, and connection</strong>. You help create a welcoming atmosphere for members, assist with events, and contribute to the smooth running of the space. This makes the internship a strong fit for students interested in <strong>community, operations, hospitality, or startups</strong>.</p>" +
+    "<br>" +
+    "<p>We welcome motivated interns who want to learn fast, take responsibility, and grow in a professional but social environment. Once accepted, you can start contributing quickly.</p>" +
+    "<br>" +
+    "<p>When you apply please let us know: </p>" +
+    "<p><strong>City of residence</strong></p>" +
+    "<p><strong>Country of residence</strong></p>" +
+    "<p><strong>Current study programme</strong></p>" +
+    "<p><strong>Availability in days or hours per week</strong></p>" +
+    "<p><strong>Why StartDock Rotterdam fits you</strong></p>" +
+    "<br>" +
+    "<p>Interested? Apply now and grow your experience at StartDock Rotterdam!</p>",
+
+  baseSalaryMin: 400,
+  baseSalaryMax: 800,
+  employmentType: "INTERN",
+  DUO: false,
+  currency: "EUR",
+  payUnit: "MONTH",
+  addressLocality: "Rotterdam",
+  area: "Community, operations, coworking",
+  englishFriendly: true,
+  workHours: "16-40 h/week",
+  datePosted: "2026/03/19",
+  validThrough: "2026-12-31",
+  categories: ["events"],
+  featured: true,
+  perSaleAmountText: "Internship compensation depends on hours, responsibilities, and experience",
+  logoUrl: "/logos/startdock-rotterdam.png",
+  logoAlt: "StartDock Rotterdam logo",
+},
+
+{
  slug: "ib-tutor",
  title: "IB Tutor (Online)",
  orgName: "AcademiaAI",
@@ -204,7 +244,7 @@ descriptionHtml: "<p><strong>Are you tired of endless study sessions and sitting
  datePosted: "2026/02/14",
  validThrough: "2026-12-31",
  categories: ["delivery", "fieldwork"],
- featured: true,
+ featured: false,
  perSaleAmountText: "14 euros per hour",
  logoUrl: "/logos/thuisbezorgd.png",
  logoAlt: "Thuisbezorgd.nl logo",
