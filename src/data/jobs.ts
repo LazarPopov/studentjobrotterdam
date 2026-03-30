@@ -192,7 +192,7 @@ const RAW_JOBS: RawJob[] = [
   perSaleAmountText: "Internship compensation is offered and depends on internship setup and hours",
   logoUrl: "/logos/startdock-rotterdam.png",
   logoAlt: "StartDock logo",
-  externalUrl: "mailto:jobs@startdock.nl?subject=Student%20Jobs%20Rotterdam%20Application&body=Hi%20StartDock%20team%2C%0A%0AI%20would%20like%20to%20apply%20for%20the%20internship.%0A%0AKind%20regards%2C"
+  // externalUrl: "mailto:jobs@startdock.nl?subject=Student%20Jobs%20Rotterdam%20Application&body=Hi%20StartDock%20team%2C%0A%0AI%20would%20like%20to%20apply%20for%20the%20internship.%0A%0AKind%20regards%2C"
 },
 
 {
