@@ -98,6 +98,13 @@ export default function Page() {
       excerpt:
         "Shift bonuses, industries, and certifications that increase pay.",
     },
+
+        {
+      slug: "startdock-study-hack-rotterdam",
+      title: "StartDock Study Hack Rotterdam",
+      excerpt:
+        "A practical Rotterdam guide connected to StartDock, student productivity, coworking, and smart ways to work and study more effectively in the city.",
+    },
   ];
 
   const faqs = [

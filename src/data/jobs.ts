@@ -147,43 +147,52 @@ const RAW_JOBS: RawJob[] = [
  // externalUrl: "https://www.domakin.nl/careers",
 },
 {
-  slug: "startdock-community-operations-internship",
-  title: "Community & Operations Internship",
-  orgName: "StartDock Rotterdam",
+  slug: "startdock-coworking-facility-management-internship",
+  title: "Facility Management & Community Internship",
+  orgName: "StartDock",
 
   descriptionHtml:
-    "<p><strong>Build real experience</strong> while working in a vibrant entrepreneurial community at StartDock Rotterdam. As an intern, you support daily operations, member experience, and community activities in a dynamic coworking environment.</p>" +
+    "<p><strong>Gain hands on experience</strong> at one of the most vibrant coworking communities in the Netherlands. StartDock is looking for motivated students who want to work from inspiring coworking spaces in the centre of Amsterdam or Rotterdam.</p>" +
     "<br>" +
-    "<p>At StartDock Rotterdam, you work closely with a team that values <strong>initiative, ownership, and connection</strong>. You help create a welcoming atmosphere for members, assist with events, and contribute to the smooth running of the space. This makes the internship a strong fit for students interested in <strong>community, operations, hospitality, or startups</strong>.</p>" +
+    "<p>StartDock is a coworking space with locations in Amsterdam, Rotterdam, and Utrecht. It offers entrepreneurs beautiful physical spaces where they can work, meet, learn, and celebrate together. As an intern, you become a real part of the team and help create a <strong>warm, social, and welcoming atmosphere</strong> for members every day.</p>" +
     "<br>" +
-    "<p>We welcome motivated interns who want to learn fast, take responsibility, and grow in a professional but social environment. Once accepted, you can start contributing quickly.</p>" +
+    "<p>This internship gives you the chance to combine <strong>operations, hospitality, community building, and facility management</strong>. One day you may organise a fun community event, and the next you may support a social media campaign or make sure the location looks perfect before closing. You work both in daily operations and on tactical or strategic projects.</p>" +
     "<br>" +
-    "<p>When you apply please let us know: </p>" +
-    "<p><strong>City of residence</strong></p>" +
-    "<p><strong>Country of residence</strong></p>" +
-    "<p><strong>Current study programme</strong></p>" +
-    "<p><strong>Availability in days or hours per week</strong></p>" +
-    "<p><strong>Why StartDock Rotterdam fits you</strong></p>" +
+    "<p>StartDock matches internships to the interests and study goals of student colleagues. Projects may relate to <strong>sustainability, procurement, customer service, customer satisfaction, interior setup, and space experience</strong>, while you also stay involved in the daily running of the location.</p>" +
     "<br>" +
-    "<p>Interested? Apply now and grow your experience at StartDock Rotterdam!</p>",
+    "<p>StartDock is looking for someone who enjoys helping others, feels energised by people, takes initiative, develops leadership skills, looks at spaces through a hospitality lens, and likes talking with the people around them.</p>" +
+    "<br>" +
+    "<p>What you can expect:</p>" +
+    "<p><strong>Young and dynamic culture</strong></p>" +
+    "<p><strong>Responsibilities aligned with your education</strong></p>" +
+    "<p><strong>Active internship guidance</strong></p>" +
+    "<p><strong>Free lunch</strong></p>" +
+    "<p><strong>Team outings</strong></p>" +
+    "<p><strong>Internship compensation</strong></p>" +
+    "<p><strong>The opportunity to build your professional network</strong></p>" +
+    "<br>" +
+    "<p>When you apply, please include your CV (optional), your motivation, the study programme you follow, and any internship requirements from your educational institution.</p>" +
+    "<br>" +
+    "<p>Interested? Apply via <strong>jobs@startdock.nl</strong> with a title <strong>Student Jobs Rotterdam Application</strong>. The team aims to respond within 48 hours.</p>",
 
-  baseSalaryMin: 400,
-  baseSalaryMax: 800,
+  baseSalaryMin: 300,
+  baseSalaryMax: 600,
   employmentType: "INTERN",
   DUO: false,
   currency: "EUR",
   payUnit: "MONTH",
   addressLocality: "Rotterdam",
-  area: "Community, operations, coworking",
+  area: "Facility management, coworking, community",
   englishFriendly: true,
   workHours: "16-40 h/week",
-  datePosted: "2026/03/19",
+  datePosted: "2026/03/30",
   validThrough: "2026-12-31",
-  categories: ["events"],
+  categories: ["hospitality", "events"],
   featured: true,
-  perSaleAmountText: "Internship compensation depends on hours, responsibilities, and experience",
+  perSaleAmountText: "Internship compensation is offered and depends on internship setup and hours",
   logoUrl: "/logos/startdock-rotterdam.png",
-  logoAlt: "StartDock Rotterdam logo",
+  logoAlt: "StartDock logo",
+  externalUrl: "mailto:jobs@startdock.nl?subject=Student%20Jobs%20Rotterdam%20Application&body=Hi%20StartDock%20team%2C%0A%0AI%20would%20like%20to%20apply%20for%20the%20internship.%0A%0AKind%20regards%2C"
 },
 
 {

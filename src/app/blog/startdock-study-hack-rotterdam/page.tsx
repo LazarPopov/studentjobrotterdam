@@ -210,7 +210,7 @@ export default function StartDockStudyHackRotterdam() {
                 <Link href="/jobs?city=Rotterdam" className="flex-1 text-center bg-blue-600 text-white font-bold py-3 rounded-xl hover:bg-blue-700 transition-colors">
                   View Student Jobs in Rotterdam
                 </Link>
-                <a href="https://startdock.nl/en/" target="_blank" rel="noopener noreferrer" className="flex-1 text-center border-2 border-slate-200 font-bold py-3 rounded-xl hover:border-blue-500 transition-colors">
+                <a href="https://startdock.nl/en/locations/rotterdam/westplein-12/" target="_blank" rel="noopener noreferrer" className="flex-1 text-center border-2 border-slate-200 font-bold py-3 rounded-xl hover:border-blue-500 transition-colors">
                   Book a Trial Day at StartDock
                 </a>
               </div>

@@ -50,6 +50,12 @@ const POSTS = [
     title: "Opening a Dutch Bank Account (2026)",
     description: "f you are moving to the Netherlands for your studies, setting up a Dutch bank account can make daily life much easier. This guide explains why it matters, what documents are commonly requested, and what to keep in mind before choosing a bank in the Netherlands.",
     },
+    {
+  slug: "startdock-study-hack-rotterdam",
+  title: "StartDock Study Hack Rotterdam",
+  description:
+    "A practical Rotterdam guide connected to StartDock, student productivity, coworking, and smart ways to work and study more effectively in the city.",
+},
 ];
 
 export const metadata: Metadata = {
